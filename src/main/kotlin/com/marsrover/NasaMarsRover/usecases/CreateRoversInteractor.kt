@@ -1,8 +1,8 @@
 package com.marsrover.NasaMarsRover.usecases
 
 import com.marsrover.NasaMarsRover.adapters.RoverInputAdapter
-import com.marsrover.NasaMarsRover.domain.entities.Direction
-import com.marsrover.NasaMarsRover.domain.entities.Position
+import com.marsrover.NasaMarsRover.rover.domain.Direction
+import com.marsrover.NasaMarsRover.rover.domain.Position
 
 class RoverService(private val roverInputAdapter: RoverInputAdapter) {
     fun createRovers(): List<Pair<Position, Direction>> {

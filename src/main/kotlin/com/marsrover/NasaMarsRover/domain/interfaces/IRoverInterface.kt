@@ -1,7 +1,7 @@
 package com.marsrover.NasaMarsRover.domain.interfaces
 
-import com.marsrover.NasaMarsRover.domain.entities.Direction
-import com.marsrover.NasaMarsRover.domain.entities.Position
+import com.marsrover.NasaMarsRover.rover.domain.Direction
+import com.marsrover.NasaMarsRover.rover.domain.Position
 
 interface IRoverInterface {
     var position: Position

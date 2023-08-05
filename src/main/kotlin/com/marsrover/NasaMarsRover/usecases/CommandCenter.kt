@@ -1,6 +1,6 @@
 package com.marsrover.NasaMarsRover.usecases
 
-import com.marsrover.NasaMarsRover.domain.entities.Position
+import com.marsrover.NasaMarsRover.rover.domain.Position
 import com.marsrover.NasaMarsRover.domain.interfaces.IPlateauInterface
 import com.marsrover.NasaMarsRover.domain.interfaces.IRoverInterface
 

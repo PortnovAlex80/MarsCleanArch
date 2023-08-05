@@ -1,8 +1,8 @@
 package com.marsrover.NasaMarsRover.adapters
 
 import com.marsrover.NasaMarsRover.adapters.interfaces.UserInputOutputInterface
-import com.marsrover.NasaMarsRover.domain.entities.Direction
-import com.marsrover.NasaMarsRover.domain.entities.Position
+import com.marsrover.NasaMarsRover.rover.domain.Direction
+import com.marsrover.NasaMarsRover.rover.domain.Position
 
 class RoverInputAdapter(private val userInputOutput: UserInputOutputInterface) {
     fun getNumberOfRovers(): Int {
@@ -34,8 +34,8 @@ class RoverInputAdapter(private val userInputOutput: UserInputOutputInterface) {
         var input: List<String>
 
         while (roverData == null) {
-            val directionsHelper = Direction.values().joinToString(", ") { "${it.name} (${it.name.first()})" }
-            userInputOutput.outputToUser("Enter initial position for rover $index in format 'X Y DIRECTION'. Possible directions are: $directionsHelper. Or type 'exit' to quit:")
+
+            userInputOutput.outputToUser("Enter initial position for rover $index in format 'X Y DIRECTION'. Possible directions are: ${Direction.possibleDirections()} . Or type 'exit' to quit:")
             input = userInputOutput.readUserInput().split(' ')
 
             if (input.size == 1 && input[0].equals("exit", ignoreCase = true)) {
@@ -63,10 +63,9 @@ class RoverInputAdapter(private val userInputOutput: UserInputOutputInterface) {
     }
 
     private fun validateDirection(dir: String): Direction? {
-        return try {
-            Direction.values().firstOrNull { it.name.startsWith(dir.toUpperCase()) }
-        } catch (e: IllegalArgumentException) {
-            null
-        }
+
+
+        return Direction.values().firstOrNull { it.name.startsWith(dir.toUpperCase()) }
+            ?: error("Possible directions are: ${Direction.possibleDirections()}. Or type 'exit' to quit:\"")
     }
 }

@@ -1,17 +1,22 @@
-package com.marsrover.NasaMarsRover.domain.entities
+package com.marsrover.NasaMarsRover.rover.domain
 
 import com.marsrover.NasaMarsRover.domain.interfaces.IRoverInterface
+import com.marsrover.NasaMarsRover.rover.application.port.out.RoverIdGeneratorPort
 
-data class Position(val x: Int, val y: Int)
+class Rover(
+    val roverId: RoverId,
+    override var position: Position,
+    override var direction: Direction
+) : IRoverInterface {
 
-enum class Direction {
-    NORTH,
-    SOUTH,
-    EAST,
-    WEST
-}
-
-class Rover(override var position: Position, override var direction: Direction) : IRoverInterface {
+    companion object {
+        fun of(
+            roverIdGeneratorPort: RoverIdGeneratorPort,
+            position: Position,
+            direction: Direction
+        ) =
+            Rover(roverIdGeneratorPort.generate(), position, direction)
+    }
 
     override fun moveForward(): Int {
         // Implement the logic of moving forward based on the current direction.
