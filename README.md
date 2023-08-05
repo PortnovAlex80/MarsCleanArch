@@ -1,4 +1,4 @@
-# Welcome to NASA's Mars Rover Project
+# Blessed by Uncle Bob: NASA's Mars Rover Project with Clean Architecture
 
 _Note: This is an unofficial project and is in no way affiliated with NASA. All mentions of NASA and Elon Musk are intended purely in jest._
 
