@@ -1,4 +1,4 @@
-package com.marsrover.NasaMarsRover.domain.entities
+package com.marsrover.NasaMarsRover.platuae.entities
 
 import com.marsrover.NasaMarsRover.rover.domain.Direction
 import com.marsrover.NasaMarsRover.rover.domain.CoordinatesXY

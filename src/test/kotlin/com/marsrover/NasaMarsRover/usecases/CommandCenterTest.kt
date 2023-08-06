@@ -1,7 +1,7 @@
 package com.marsrover.NasaMarsRover.usecases
 
-import com.marsrover.NasaMarsRover.domain.interfaces.IPlateauInterface
-import com.marsrover.NasaMarsRover.domain.interfaces.IRoverInterface
+import com.marsrover.NasaMarsRover.platuae.interfaces.IPlateauInterface
+import com.marsrover.NasaMarsRover.platuae.interfaces.IRoverInterface
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.*

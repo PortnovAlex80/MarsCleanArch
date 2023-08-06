@@ -1,4 +1,4 @@
-package com.marsrover.NasaMarsRover.domain.value_objects
+package com.marsrover.NasaMarsRover.platuae.value_objects
 
 data class UnitLength(val value: Int, val unit: UnitMeasurement) {
     init {

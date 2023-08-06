@@ -1,4 +1,4 @@
-package com.marsrover.NasaMarsRover.domain.value_objects
+package com.marsrover.NasaMarsRover.platuae.value_objects
 
 data class Size(val width: UnitLength, val height: UnitLength) {
     init {

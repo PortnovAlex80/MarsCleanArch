@@ -1,8 +1,8 @@
-package com.marsrover.NasaMarsRover.domain.entities
+package com.marsrover.NasaMarsRover.platuae.entities
 
-import com.marsrover.NasaMarsRover.domain.value_objects.Size
-import com.marsrover.NasaMarsRover.domain.value_objects.UnitLength
-import com.marsrover.NasaMarsRover.domain.value_objects.UnitMeasurement
+import com.marsrover.NasaMarsRover.platuae.value_objects.Size
+import com.marsrover.NasaMarsRover.platuae.value_objects.UnitLength
+import com.marsrover.NasaMarsRover.platuae.value_objects.UnitMeasurement
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
