@@ -1,24 +1,23 @@
 package com.marsrover.NasaMarsRover.rover.domain
 
-import com.marsrover.NasaMarsRover.domain.interfaces.IRoverInterface
 import com.marsrover.NasaMarsRover.rover.application.port.out.RoverIdGeneratorPort
 
 class Rover(
     val roverId: RoverId,
-    override var position: Position,
-    override var direction: Direction
-) : IRoverInterface {
+    var coordinatesXY: CoordinatesXY,
+    var direction: Direction
+) {
 
     companion object {
         fun of(
             roverIdGeneratorPort: RoverIdGeneratorPort,
-            position: Position,
+            coordinatesXY: CoordinatesXY,
             direction: Direction
         ) =
-            Rover(roverIdGeneratorPort.generate(), position, direction)
+            Rover(roverIdGeneratorPort.generate(), coordinatesXY, direction)
     }
 
-    override fun moveForward(): Int {
+    fun moveForward(): Int {
         // Implement the logic of moving forward based on the current direction.
         return if (scan()) {
             // Implement the logic of moving forward based on the current direction.
@@ -29,17 +28,17 @@ class Rover(
         }
     }
 
-    override fun turnLeft() {
+    fun turnLeft() {
         // Implement the logic of turning left.
         TODO("Not implemented")
     }
 
-    override fun turnRight() {
+    fun turnRight() {
         // Implement the logic of turning right.
         TODO("Not implemented")
     }
 
-    override fun scan(): Boolean {
+    fun scan(): Boolean {
         // Implement the logic of scanning the space in front of the Rover.
         // Return true if it is safe to move forward, false otherwise.
         TODO("Not implemented")

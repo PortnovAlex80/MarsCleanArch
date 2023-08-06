@@ -1,6 +1,6 @@
-package com.marsrover.NasaMarsRover.ui
+package com.marsrover.NasaMarsRover.rover.adapter.`in`.terminal
 
-import com.marsrover.NasaMarsRover.adapters.interfaces.UserInputOutputInterface
+import com.marsrover.NasaMarsRover.rover.adapter.`in`.terminal.UserInputOutputInterface
 
 
 class ConsoleUserInputOutput : UserInputOutputInterface {

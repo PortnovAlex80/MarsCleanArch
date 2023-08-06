@@ -1,8 +1,7 @@
 package com.marsrover.NasaMarsRover.domain.entities
 
-import com.marsrover.NasaMarsRover.rover.application.port.out.RoverIdGeneratorPort
 import com.marsrover.NasaMarsRover.rover.domain.Direction
-import com.marsrover.NasaMarsRover.rover.domain.Position
+import com.marsrover.NasaMarsRover.rover.domain.CoordinatesXY
 import com.marsrover.NasaMarsRover.rover.domain.Rover
 import com.marsrover.NasaMarsRover.rover.domain.RoverId
 import org.junit.jupiter.api.Assertions.*
@@ -12,13 +11,13 @@ import java.util.concurrent.atomic.AtomicLong
 class RoverTest {
     @Test
     fun testRoverInitialState() {
-        val initialPosition = Position(5, 5)
+        val initialCoordinatesXY = CoordinatesXY(5, 5)
         val initialDirection = Direction.NORTH
         val counter = AtomicLong(0)
         val roverId = RoverId(counter.incrementAndGet())
-        val rover = Rover(roverId, initialPosition, initialDirection)
+        val rover = Rover(roverId, initialCoordinatesXY, initialDirection)
 
-        assertEquals(initialPosition, rover.position)
+        assertEquals(initialCoordinatesXY, rover.coordinatesXY)
         assertEquals(initialDirection, rover.direction)
     }
 }

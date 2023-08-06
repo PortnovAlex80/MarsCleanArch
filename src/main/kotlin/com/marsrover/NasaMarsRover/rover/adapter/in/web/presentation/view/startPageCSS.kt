@@ -1,11 +1,11 @@
-package com.marsrover.NasaMarsRover.presentation.view
+package com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view
 
 import kotlinx.html.HTML
 import kotlinx.html.head
 import kotlinx.html.link
 import kotlinx.html.style
 
-fun HTML.bootstrapPalteauPageCSS() {
+fun HTML.bootstrapHeader() {
     head {
         link(rel = "stylesheet", href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css")
         style {
@@ -40,13 +40,6 @@ fun HTML.bootstrapPalteauPageCSS() {
                       display: block;
                       margin: 5px auto;
                     }
-                    .short-input {
-                      width: 50px;
-                    }
-                    .coordinate-form {
-                      display: flex;
-                      justify-content: space-between;
-                    }                    
                     """
         }
     }

@@ -1,10 +1,9 @@
-package com.marsrover.NasaMarsRover.adapters
+package com.marsrover.NasaMarsRover.rover.adapter.`in`.terminal
 
-import com.marsrover.NasaMarsRover.adapters.interfaces.UserInputOutputInterface
 import com.marsrover.NasaMarsRover.rover.domain.Direction
-import com.marsrover.NasaMarsRover.rover.domain.Position
+import com.marsrover.NasaMarsRover.rover.domain.CoordinatesXY
 
-class RoverInputAdapter(private val userInputOutput: UserInputOutputInterface) {
+class RoverInputTerminalAdapter(private val userInputOutput: UserInputOutputInterface) {
     fun getNumberOfRovers(): Int {
         var numberOfRovers: Int? = null
         var input: String
@@ -29,8 +28,8 @@ class RoverInputAdapter(private val userInputOutput: UserInputOutputInterface) {
         return numberOfRovers
     }
 
-    fun getRoverData(index: Int): Pair<Position, Direction>? {
-        var roverData: Pair<Position, Direction>? = null
+    fun getRoverData(index: Int): Pair<CoordinatesXY, Direction>? {
+        var roverData: Pair<CoordinatesXY, Direction>? = null
         var input: List<String>
 
         while (roverData == null) {
@@ -50,22 +49,18 @@ class RoverInputAdapter(private val userInputOutput: UserInputOutputInterface) {
 
             val x = input[0].toIntOrNull()
             val y = input[1].toIntOrNull()
-            val direction = validateDirection(input[2])
-
-            if (x == null || y == null || direction == null) {
+            val isDirectionValid = Direction.isValidInput(input[2])
+            val direction = Direction.valueOf(input[2].uppercase())
+            if (x == null || y == null || !isDirectionValid) {
                 userInputOutput.outputToUser("Invalid data for rover. ${x} ${y} ${direction}")
             } else {
-                roverData = Position(x, y) to direction
+
+                roverData = Pair(CoordinatesXY(x, y), direction)
             }
         }
 
         return roverData
     }
 
-    private fun validateDirection(dir: String): Direction? {
 
-
-        return Direction.values().firstOrNull { it.name.startsWith(dir.toUpperCase()) }
-            ?: error("Possible directions are: ${Direction.possibleDirections()}. Or type 'exit' to quit:\"")
-    }
 }
