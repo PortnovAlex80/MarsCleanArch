@@ -4,11 +4,12 @@ import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
 
 
-fun renderDetailedView(): String =
+fun renderPlateauView(): String =
     StringBuilder()
+
         .appendHTML()
         .html {
-            bootstrapHeader()
+            bootstrapPalteauPageCSS()
             body {
                 div(classes = "controller-container") {
                     h1 { +"Mars Rover Controller" }
@@ -20,6 +21,20 @@ fun renderDetailedView(): String =
                                         // Добавьте логику для установки класса "rover", если нужно
                                     }
                                 }
+                            }
+                        }
+                    }
+                    form(classes = "coordinate-form") {
+                        div {
+                            label { +"X Coordinate:" }
+                            input(classes = "coordinate-input short-input", type = InputType.number, name = "x") {
+                                min = "0"; max = "19"; required = true
+                            }
+                        }
+                        div {
+                            label { +"Y Coordinate:" }
+                            input(classes = "coordinate-input short-input", type = InputType.number, name = "y") {
+                                min = "0"; max = "19"; required = true
                             }
                         }
                     }
@@ -43,4 +58,3 @@ fun renderDetailedView(): String =
                 }
             }
         }.toString()
-
