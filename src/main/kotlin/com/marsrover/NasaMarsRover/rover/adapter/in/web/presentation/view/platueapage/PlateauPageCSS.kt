@@ -24,7 +24,7 @@ fun HTML.bootstrapPalteauPageCSS() {
                     .grid-item {
                       width: 20px;
                       height: 20px;
-                      background-color: #f0f0f0;
+ 
                       border: 1px solid #d4d4d4;
                     }
                     .button-group {
@@ -46,10 +46,13 @@ fun HTML.bootstrapPalteauPageCSS() {
                     .coordinate-form {
                       display: flex;
                       justify-content: space-between;
-                    }                    
+                    }
+                    .rover {
+                        background-color: #ff0000;
+                    }
+
+
                     """
         }
     }
 }
-
-

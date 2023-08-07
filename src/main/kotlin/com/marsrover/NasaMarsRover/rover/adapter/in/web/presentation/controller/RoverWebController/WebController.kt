@@ -24,11 +24,24 @@ class WebController {
         return renderCoordinatePage(count)
     }
 
-    @RequestMapping(value = ["/plateau"], method = [RequestMethod.GET])
+    @RequestMapping(value = ["/set_coordinates"], method = [RequestMethod.POST])
     @ResponseBody
-    fun showPlateauForm(model: Model): String {
-        return renderPlateauView()
+    fun showPlateauPage(@RequestParam roverCoordinates: Map<String, String>, model: Model): String {
+        val coordinates = roverCoordinates.entries
+            .filter { it.key.startsWith("rover") }
+            .groupBy(
+                { it.key.substringBeforeLast('_') },
+                { Pair(it.key.substringAfterLast('_'), it.value.toInt()) }
+            )
+            .values
+            .mapNotNull { group ->
+                val sortedGroup = group.sortedBy { it.first }
+                if (sortedGroup.size == 2 && sortedGroup[0].first == "x" && sortedGroup[1].first == "y") {
+                    sortedGroup[0].second to sortedGroup[1].second
+                } else {
+                    null
+                }
+            }
+        return renderPlateauView(coordinates)
     }
-
-
 }
