@@ -1,4 +1,4 @@
-package com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view
+package com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.platueapage
 
 import kotlinx.html.HTML
 import kotlinx.html.head

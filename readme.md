@@ -27,3 +27,8 @@ Buckle up, humanity! Mars, here we come!
 (_PS: Elon, if you're reading this, may the best organization win!_)
 
 **The Mars Rover project: Come for the adventure, stay for the science.**
+
+
+# REST API SPECs
+
+POST http://localhost:8080/rovers Create rovers

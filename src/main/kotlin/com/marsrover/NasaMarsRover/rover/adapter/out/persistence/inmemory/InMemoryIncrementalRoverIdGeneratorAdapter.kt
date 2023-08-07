@@ -1,6 +1,6 @@
 package com.marsrover.NasaMarsRover.rover.adapter.out.persistence.inmemory
 
-import com.marsrover.NasaMarsRover.rover.application.port.out.RoverIdGeneratorPort
+import com.marsrover.NasaMarsRover.rover.domain.RoverIdGeneratorPort
 import com.marsrover.NasaMarsRover.rover.domain.RoverId
 import org.springframework.stereotype.Service
 import java.util.concurrent.atomic.AtomicLong

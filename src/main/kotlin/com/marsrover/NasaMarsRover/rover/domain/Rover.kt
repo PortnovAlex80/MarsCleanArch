@@ -1,6 +1,5 @@
 package com.marsrover.NasaMarsRover.rover.domain
 
-import com.marsrover.NasaMarsRover.rover.application.port.out.RoverIdGeneratorPort
 
 class Rover(
     val roverId: RoverId,

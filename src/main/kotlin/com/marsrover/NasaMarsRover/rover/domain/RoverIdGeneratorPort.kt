@@ -1,4 +1,4 @@
-package com.marsrover.NasaMarsRover.rover.application.port.out
+package com.marsrover.NasaMarsRover.rover.domain
 
 import com.marsrover.NasaMarsRover.rover.domain.RoverId
 

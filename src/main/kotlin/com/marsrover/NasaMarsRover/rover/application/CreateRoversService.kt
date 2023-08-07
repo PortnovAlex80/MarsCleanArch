@@ -3,7 +3,7 @@ package com.marsrover.NasaMarsRover.rover.application
 import com.marsrover.NasaMarsRover.rover.application.port.`in`.CreateRoversCommand
 import com.marsrover.NasaMarsRover.rover.application.port.`in`.CreateRoversUseCase
 import com.marsrover.NasaMarsRover.rover.application.port.out.CreateRoversPort
-import com.marsrover.NasaMarsRover.rover.application.port.out.RoverIdGeneratorPort
+import com.marsrover.NasaMarsRover.rover.domain.RoverIdGeneratorPort
 import com.marsrover.NasaMarsRover.rover.domain.Direction
 import com.marsrover.NasaMarsRover.rover.domain.CoordinatesXY
 import com.marsrover.NasaMarsRover.rover.domain.Rover
