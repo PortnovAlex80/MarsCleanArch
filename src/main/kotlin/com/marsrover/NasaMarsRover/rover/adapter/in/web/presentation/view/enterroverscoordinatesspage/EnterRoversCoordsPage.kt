@@ -15,8 +15,8 @@ fun renderCoordinatePage(roverCount: Int): String =
                     h1 { +"Enter the coordinates for each rover:" }
                     form(action = "/set_coordinates", method = FormMethod.post) {
                         for (i in 1..roverCount) {
-                            val randomX = Random.nextInt(0, 20)
-                            val randomY = Random.nextInt(0, 20)
+                            val randomX = Random.nextInt(1, 20)
+                            val randomY = Random.nextInt(1, 20)
                             label { +"Enter coordinates for Rover $i: " }
                             div(classes = "row") {
                                 div(classes = "col") {
