@@ -15,6 +15,6 @@ enum class Direction {
             return values().any { it.name == input.uppercase() || it.name.first() == input.uppercase().first() }
         }
 
-        fun default() = Direction.NORTH
+        fun default() = NORTH
     }
 }

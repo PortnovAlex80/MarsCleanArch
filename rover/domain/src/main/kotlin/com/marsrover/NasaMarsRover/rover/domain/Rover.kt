@@ -1,6 +1,5 @@
 package com.marsrover.NasaMarsRover.rover.domain
 
-
 class Rover(
     val roverId: RoverId,
     var coordinatesXY: CoordinatesXY,
