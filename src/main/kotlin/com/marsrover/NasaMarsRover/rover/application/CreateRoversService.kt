@@ -9,7 +9,6 @@ import com.marsrover.NasaMarsRover.rover.domain.CoordinatesXY
 import com.marsrover.NasaMarsRover.rover.domain.Rover
 import org.springframework.stereotype.Service
 
-@Service
 class CreateRoversService(val createRoversPort: CreateRoversPort, val roverIdGenerator: RoverIdGeneratorPort) :
     CreateRoversUseCase {
     override fun execute(command: CreateRoversCommand) {

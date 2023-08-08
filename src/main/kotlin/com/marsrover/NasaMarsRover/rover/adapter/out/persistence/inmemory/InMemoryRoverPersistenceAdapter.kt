@@ -5,7 +5,6 @@ import com.marsrover.NasaMarsRover.rover.domain.Rover
 import com.marsrover.NasaMarsRover.rover.domain.RoverId
 import org.springframework.stereotype.Service
 
-@Service
 class InMemoryRoverPersistenceAdapter : CreateRoversPort {
     private val inMemoryStorage = mutableMapOf<RoverId, Rover>()
     override fun createRovers(rovers: List<Rover>) {

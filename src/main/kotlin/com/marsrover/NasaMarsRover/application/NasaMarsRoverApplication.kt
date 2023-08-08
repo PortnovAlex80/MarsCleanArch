@@ -1,5 +1,6 @@
-package com.marsrover.NasaMarsRover
+package com.marsrover.NasaMarsRover.application
 
+import com.marsrover.NasaMarsRover.application.configuration.RoverConfiguration
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
@@ -8,7 +9,5 @@ class NasaMarsRoverApplication
 
 fun main(args: Array<String>) {
 
-	runApplication<NasaMarsRoverApplication>(*args)
-
-
+	runApplication<RoverConfiguration>(*args)
 }

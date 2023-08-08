@@ -4,7 +4,6 @@ import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
 import kotlin.random.Random
 
-
 fun renderEnterRoversCountPageView(): String =
     StringBuilder()
         .appendHTML()

@@ -5,7 +5,6 @@ import com.marsrover.NasaMarsRover.rover.domain.RoverId
 import org.springframework.stereotype.Service
 import java.util.concurrent.atomic.AtomicLong
 
-@Service
 class InMemoryIncrementalRoverIdGeneratorAdapter : RoverIdGeneratorPort {
 
     private val counter = AtomicLong(0)
