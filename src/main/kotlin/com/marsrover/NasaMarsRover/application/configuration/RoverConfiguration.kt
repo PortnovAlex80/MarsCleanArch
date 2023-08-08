@@ -11,7 +11,6 @@ import com.marsrover.NasaMarsRover.rover.domain.RoverIdGeneratorPort
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Import
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
 
 @Configuration
@@ -20,19 +19,18 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc
 
 class RoverConfiguration {
     @Bean
-    fun inMemoryIncrementalRoverIdGeneratorAdapter() = InMemoryIncrementalRoverIdGeneratorAdapter()
+    fun roverIdGeneratorPort() = InMemoryIncrementalRoverIdGeneratorAdapter()
 
     @Bean
-    fun inMemoryRoverPersistenceAdapter() = InMemoryRoverPersistenceAdapter()
+    fun createRoversPort() = InMemoryRoverPersistenceAdapter()
 
     @Bean
-    fun createRoversService(createRoversPort: CreateRoversPort, roverIdGenerator: RoverIdGeneratorPort) =
+    fun createRoversUseCase(createRoversPort: CreateRoversPort, roverIdGenerator: RoverIdGeneratorPort) =
         CreateRoversService(createRoversPort, roverIdGenerator)
 
     @Bean
     fun roverRestController(createRoversUseCase: CreateRoversUseCase) = RoverRestController(createRoversUseCase)
 
     @Bean
-
     fun roverWebController() = RoverWebController()
 }
