@@ -38,21 +38,34 @@ fun renderRoversOnOpenMapPage(rovers: List<RoverPresentationDTO>): String =
 
                       // Adding layer to the map
                        map.addLayer(layer);
+
+                       // Define the custom icon
+                           var roverIcon = L.icon({
+                               iconUrl: 'https://img.icons8.com/?size=512&id=pg6uItOKXEQE&format=png', // Replace this with the path to your icon
+                               iconSize: [30, 30], // size of the icon (You can adjust based on your icon's dimensions)
+                               iconAnchor: [15, 15], // point of the icon which will correspond to marker's location
+                               popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
+                       });  
             
                        var roverCoordinates = ${rovers.toJsonString()};
-                       
+                                     
                        for(var i = 0; i < roverCoordinates.length; i++) {
                            var lat = roverCoordinates[i].x;
                            var lng = roverCoordinates[i].y;
             
                            // Creating a Marker
-                           var marker = L.marker([lat, lng]);
+                           //var marker1 = L.marker([lat, lng]);
+                           
+                           // Creating a Marker with the custom icon
+                           var marker = L.marker([lat, lng], {icon: roverIcon});                        
             
                            // Adding popup to the marker
                            marker.bindPopup('Rover ' + (i + 1)).openPopup();
+//                           marker1.bindPopup('Rover ' + (i + 1)).openPopup();
             
                            // Adding marker to the map
                            marker.addTo(map);
+//                           marker1.addTo(map);
                        }
 
         """.trimIndent()
@@ -86,3 +99,4 @@ fun renderRoversOnOpenMapPage(rovers: List<RoverPresentationDTO>): String =
 fun List<RoverPresentationDTO>.toJsonString(): String {
     return joinToString(prefix = "[", postfix = "]") { "{ x: ${it.x}, y: ${it.y} }" }
 }
+
