@@ -28,8 +28,6 @@ dependencies {
     implementation(project(":rover:domain"))
     implementation(project(":rover:usecases"))
 
-    implementation(project(mapOf("path" to ":")))
-
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

@@ -20,16 +20,11 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    // view
-    implementation( "org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
 
     implementation(project(":rover:domain"))
     implementation(project(":rover:usecases"))
-    implementation(project(":rover:adapter"))
-
-    implementation(project(mapOf("path" to ":")))
+    implementation(project(":rover:adapters"))
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
