@@ -1,4 +1,4 @@
-package com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.model
+package com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.utils
 
 import kotlin.random.Random
 

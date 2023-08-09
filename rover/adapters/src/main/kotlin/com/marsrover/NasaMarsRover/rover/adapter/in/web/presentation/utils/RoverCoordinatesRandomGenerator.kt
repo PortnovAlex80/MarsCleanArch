@@ -1,5 +1,6 @@
-package com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.model
+package com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.utils
 
+import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.model.RoverPresentationDTO
 import kotlin.random.Random
 
 fun roverCoordinatesRandomGeneratorForDefaultDemoTest(count: Int): List<RoverPresentationDTO> {
