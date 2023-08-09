@@ -33,7 +33,7 @@ class RoverWebController {
             .filter { it.key.startsWith("rover") }
             .groupBy(
                 { it.key.substringBeforeLast('_') },
-                { Pair(it.key.substringAfterLast('_'), it.value.toInt()) }
+                { Pair(it.key.substringAfterLast('_'), it.value.toDouble()) }
             )
             .values
             .mapNotNull { group ->
@@ -44,6 +44,13 @@ class RoverWebController {
                     null
                 }
             }
+
+        println("RoverCoordinates: $roverCoordinates")
+
+        println("Grouped Coordinates: ${roverCoordinates.entries.groupBy({ it.key.substringBeforeLast('_') }, { Pair(it.key.substringAfterLast('_'), it.value) })}")
+
+        println("Final Coordinates: $coordinates")
+
 
         val roverCount = roverCoordinates.size / 2
 //        return renderRoversOnPlateauView(coordinates, roverCount)

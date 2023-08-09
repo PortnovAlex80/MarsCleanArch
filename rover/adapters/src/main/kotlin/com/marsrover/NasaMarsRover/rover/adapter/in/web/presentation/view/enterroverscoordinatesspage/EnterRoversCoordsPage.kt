@@ -15,29 +15,29 @@ fun renderCoordinatePage(roverCount: Int): String =
                     h1 { +"Enter the coordinates for each rover:" }
                     form(action = "/set_coordinates", method = FormMethod.post) {
                         for (i in 1..roverCount) {
-                            val randomX = Random.nextInt(1, 20)
-                            val randomY = Random.nextInt(1, 20)
+                            val randomLatitude = Random.nextDouble(-25.0, -24.0)
+                            val randomLongitude = Random.nextDouble(-70.0, -69.0)
                             label { +"Enter coordinates for Rover $i: " }
                             div(classes = "row") {
                                 div(classes = "col") {
                                     div(classes = "input-group") {
                                         div(classes = "input-group-prepend") {
-                                            span(classes = "input-group-text") { +"X" }
+                                            span(classes = "input-group-text") { +"Latitude" }
                                         }
                                         input(type = InputType.number, name = "rover${i}_x") {
-                                            value = randomX.toString()
-                                            min = "1"; max = "100"; required = true
+                                            value = randomLatitude.toString()
+//                                            min = "-25.0"; max = "-24.0"; required = true
                                         }
                                     }
                                 }
                                 div(classes = "col") {
                                     div(classes = "input-group") {
                                         div(classes = "input-group-prepend") {
-                                            span(classes = "input-group-text") { +"Y" }
+                                            span(classes = "input-group-text") { +"Longitude" }
                                         }
                                         input(type = InputType.number, name = "rover${i}_y") {
-                                            value = randomY.toString()
-                                            min = "1"; max = "100"; required = true
+                                            value = randomLongitude.toString()
+//                                            min = "-70.0"; max = "-69.0"; required = true
                                         }
                                     }
                                 }

@@ -14,11 +14,11 @@ fun renderEnterRoversCountPageView(): String =
                     h1 { +"Welcome to Uncle Bob's Blessed Mars Rover Controller" }
                     p { +"Please enter the number of rovers you want to deploy:" }
                     form(action = "/roversCoordinates", method = FormMethod.post) {
-                        val ROVERMAX = 20
+                        val ROVERMAX = 6
                         val randomRoverCnt = Random.nextInt(1, ROVERMAX)
                         input(type = InputType.number, name = "count") {
                             value = randomRoverCnt.toString()
-                            min = "1"; max = "7"; required = true } // 7 because it fit on on web page for test only
+                            min = "1"; max = "6"; required = true } // 6 because it fit on on web page for test only
                         br
                         button(type = ButtonType.submit) { +"Start Exploration" }
                     }

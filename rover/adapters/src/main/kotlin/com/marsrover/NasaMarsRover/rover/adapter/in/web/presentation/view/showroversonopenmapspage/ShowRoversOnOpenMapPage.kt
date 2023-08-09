@@ -3,7 +3,7 @@ package com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.sho
 import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
 
-fun renderRoversOnOpenMapPage(roverCoordinates: List<Pair<Int, Int>>, roverCount: Int): String =
+fun renderRoversOnOpenMapPage(roverCoordinates: List<Pair<Double, Double>>, roverCount: Int): String =
     StringBuilder()
         .appendHTML()
         .html {
@@ -28,27 +28,32 @@ fun renderRoversOnOpenMapPage(roverCoordinates: List<Pair<Int, Int>>, roverCount
                     script {
                         unsafe {
                             +"""
-                       var map = L.map('map').setView([-24.5, -69.5], 10); // центр пустыни Атакама
+                       var map = L.map('map').setView([-24.5, -69.5], 9); // центр пустыни Атакама
 
+                       // Creating a Layer object
+                       var layer = new L.TileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                           attribution: '&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                       });
 
-//            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-//                maxZoom: 19
-//            }).addTo(map);
+                      // Adding layer to the map
+                       map.addLayer(layer);
             
-            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: '&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-            }).addTo(map);
+                       var roverCoordinates = ${roverCoordinates.toJsonString()};
+                       
+                       for(var i = 0; i < roverCoordinates.length; i++) {
+                           var lat = roverCoordinates[i][0];
+                           var lng = roverCoordinates[i][1];
+            
+                           // Creating a Marker
+                           var marker = L.marker([lat, lng]);
+            
+                           // Adding popup to the marker
+                           marker.bindPopup('Rover ' + (i + 1)).openPopup();
+            
+                           // Adding marker to the map
+                           marker.addTo(map);
+                       }
 
-
-            var roverCoordinates = ${roverCoordinates.toJsonString()};
-            for(var i = 0; i < roverCoordinates.length; i++) {
-                // Для начала преобразуйте координаты в географические для демонстрации
-                var lat = 51.505 + (roverCoordinates[i].first - 10) * 0.005;
-                var lng = -0.09 + (roverCoordinates[i].second - 10) * 0.005;
-                L.marker([lat, lng]).addTo(map)
-                    .bindPopup('Rover ' + (i + 1)).openPopup();
-            }
         """.trimIndent()
                         }
                     }
@@ -77,6 +82,6 @@ fun renderRoversOnOpenMapPage(roverCoordinates: List<Pair<Int, Int>>, roverCount
             }
         }.toString()
 
-fun List<Pair<Int, Int>>.toJsonString(): String {
+fun List<Pair<Double, Double>>.toJsonString(): String {
     return joinToString(prefix = "[", postfix = "]") { "[${it.first}, ${it.second}]" }
 }
