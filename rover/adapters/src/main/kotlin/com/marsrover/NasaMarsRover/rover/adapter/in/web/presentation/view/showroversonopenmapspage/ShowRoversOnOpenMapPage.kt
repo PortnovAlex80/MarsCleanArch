@@ -1,9 +1,10 @@
 package com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.showroversonopenmapspage
 
+import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.model.RoverPresentationDTO
 import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
 
-fun renderRoversOnOpenMapPage(roverCoordinates: List<Pair<Double, Double>>, roverCount: Int): String =
+fun renderRoversOnOpenMapPage(rovers: List<RoverPresentationDTO>): String =
     StringBuilder()
         .appendHTML()
         .html {
@@ -38,11 +39,11 @@ fun renderRoversOnOpenMapPage(roverCoordinates: List<Pair<Double, Double>>, rove
                       // Adding layer to the map
                        map.addLayer(layer);
             
-                       var roverCoordinates = ${roverCoordinates.toJsonString()};
+                       var roverCoordinates = ${rovers.toJsonString()};
                        
                        for(var i = 0; i < roverCoordinates.length; i++) {
-                           var lat = roverCoordinates[i][0];
-                           var lng = roverCoordinates[i][1];
+                           var lat = roverCoordinates[i].x;
+                           var lng = roverCoordinates[i].y;
             
                            // Creating a Marker
                            var marker = L.marker([lat, lng]);
@@ -71,7 +72,7 @@ fun renderRoversOnOpenMapPage(roverCoordinates: List<Pair<Double, Double>>, rove
 
                         // For the "Back" button
                         form(action = "/roversCoordinates", method = FormMethod.post, classes = "d-inline-block") {
-                            input(type = InputType.hidden, name = "count") { value = roverCount.toString() }
+                            input(type = InputType.hidden, name = "count") { value = rovers.size.toString() }
                             button(classes = "btn btn-secondary", type = ButtonType.submit) { +"Back" }
                         }
                     }
@@ -82,6 +83,6 @@ fun renderRoversOnOpenMapPage(roverCoordinates: List<Pair<Double, Double>>, rove
             }
         }.toString()
 
-fun List<Pair<Double, Double>>.toJsonString(): String {
-    return joinToString(prefix = "[", postfix = "]") { "[${it.first}, ${it.second}]" }
+fun List<RoverPresentationDTO>.toJsonString(): String {
+    return joinToString(prefix = "[", postfix = "]") { "{ x: ${it.x}, y: ${it.y} }" }
 }

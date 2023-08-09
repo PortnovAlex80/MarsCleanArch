@@ -24,5 +24,3 @@ fun renderEnterRoversCountPageView(ROVERMAX: Int, roverCount: Int): String =
             }
         }.toString()
 
-
-

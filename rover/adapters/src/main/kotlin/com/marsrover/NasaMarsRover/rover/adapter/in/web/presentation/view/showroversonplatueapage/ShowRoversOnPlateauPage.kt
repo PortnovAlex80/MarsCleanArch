@@ -54,9 +54,3 @@ fun renderRoversOnPlateauView(roverCoordinates: List<Pair<Int, Int>>, roverCount
                 }
             }
         }.toString()
-
-//                    form(classes = "button-group", action = "/confirm_rovers", method = FormMethod.post) {
-//                        button(classes = "btn btn-primary", type = ButtonType.submit) { +"Confirm Rover Creation" }
-//                        input(type = InputType.hidden, name = "count") { value = roverCount.toString() }
-//                        button(classes = "btn btn-secondary", type = ButtonType.submit) { +"Back" }
-//                    }
