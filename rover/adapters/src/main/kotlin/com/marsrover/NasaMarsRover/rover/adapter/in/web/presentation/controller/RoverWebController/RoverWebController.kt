@@ -1,5 +1,7 @@
 package com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.controller.RoverWebController
 
+import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.model.RoverConstants
+import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.model.roverCountRandomGenerator
 import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.showroversonplatueapage.renderRoversOnPlateauView
 import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.enterroverscoordinatesspage.renderCoordinatePage
 import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.enterroverscountpage.renderEnterRoversCountPageView
@@ -16,7 +18,7 @@ class RoverWebController {
     @RequestMapping(value = ["/"], method = [RequestMethod.GET])
     @ResponseBody
     fun showStartPage(model: Model): String {
-        return renderEnterRoversCountPageView()
+        return renderEnterRoversCountPageView(RoverConstants.ROVER_MAX.value, roverCountRandomGenerator())
     }
 
     @RequestMapping(value = ["/roversCoordinates"], method = [RequestMethod.POST])

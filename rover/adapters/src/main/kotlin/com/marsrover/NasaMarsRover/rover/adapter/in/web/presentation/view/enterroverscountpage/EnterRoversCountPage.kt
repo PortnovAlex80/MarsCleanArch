@@ -4,7 +4,7 @@ import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
 import kotlin.random.Random
 
-fun renderEnterRoversCountPageView(): String =
+fun renderEnterRoversCountPageView(ROVERMAX: Int, roverCount: Int): String =
     StringBuilder()
         .appendHTML()
         .html {
@@ -14,11 +14,9 @@ fun renderEnterRoversCountPageView(): String =
                     h1 { +"Welcome to Uncle Bob's Blessed Mars Rover Controller" }
                     p { +"Please enter the number of rovers you want to deploy:" }
                     form(action = "/roversCoordinates", method = FormMethod.post) {
-                        val ROVERMAX = 6
-                        val randomRoverCnt = Random.nextInt(1, ROVERMAX)
                         input(type = InputType.number, name = "count") {
-                            value = randomRoverCnt.toString()
-                            min = "1"; max = "6"; required = true } // 6 because it fit on on web page for test only
+                            value = roverCount.toString()
+                            min = "1"; max = "${ROVERMAX}"; required = true }
                         br
                         button(type = ButtonType.submit) { +"Start Exploration" }
                     }
