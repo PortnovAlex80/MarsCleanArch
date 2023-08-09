@@ -3,6 +3,7 @@ package com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.controll
 import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.showroversonplatueapage.renderRoversOnPlateauView
 import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.enterroverscoordinatesspage.renderCoordinatePage
 import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.enterroverscountpage.renderEnterRoversCountPageView
+import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.showroversonopenmapspage.renderRoversOnOpenMapPage
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.RequestMapping
@@ -26,6 +27,7 @@ class RoverWebController {
 
     @RequestMapping(value = ["/set_coordinates"], method = [RequestMethod.POST])
     @ResponseBody
+
     fun showPlateauPage(@RequestParam roverCoordinates: Map<String, String>, model: Model): String {
         val coordinates = roverCoordinates.entries
             .filter { it.key.startsWith("rover") }
@@ -44,6 +46,7 @@ class RoverWebController {
             }
 
         val roverCount = roverCoordinates.size / 2
-        return renderRoversOnPlateauView(coordinates, roverCount)
+//        return renderRoversOnPlateauView(coordinates, roverCount)
+        return renderRoversOnOpenMapPage(coordinates, roverCount)
     }
 }

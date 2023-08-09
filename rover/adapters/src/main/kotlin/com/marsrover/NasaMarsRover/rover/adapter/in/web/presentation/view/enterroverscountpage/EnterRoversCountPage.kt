@@ -18,7 +18,7 @@ fun renderEnterRoversCountPageView(): String =
                         val randomRoverCnt = Random.nextInt(1, ROVERMAX)
                         input(type = InputType.number, name = "count") {
                             value = randomRoverCnt.toString()
-                            min = "1"; max = "ROVERMAX"; required = true }
+                            min = "1"; max = "7"; required = true } // 7 because it fit on on web page for test only
                         br
                         button(type = ButtonType.submit) { +"Start Exploration" }
                     }
