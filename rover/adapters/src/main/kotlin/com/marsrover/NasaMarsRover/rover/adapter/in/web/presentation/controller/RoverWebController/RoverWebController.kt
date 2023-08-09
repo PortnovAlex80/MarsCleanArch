@@ -1,8 +1,8 @@
 package com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.controller.RoverWebController
 
 import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.model.RoverConstants
-import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.model.roverCountRandomGenerator
-import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.showroversonplatueapage.renderRoversOnPlateauView
+import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.model.roverCoordinatesRandomGeneratorForDefaultDemoTest
+import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.model.roverCountRandomGeneratorForDefaultDemoTest
 import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.enterroverscoordinatesspage.renderCoordinatePage
 import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.enterroverscountpage.renderEnterRoversCountPageView
 import com.marsrover.NasaMarsRover.rover.adapter.`in`.web.presentation.view.showroversonopenmapspage.renderRoversOnOpenMapPage
@@ -18,18 +18,17 @@ class RoverWebController {
     @RequestMapping(value = ["/"], method = [RequestMethod.GET])
     @ResponseBody
     fun showStartPage(model: Model): String {
-        return renderEnterRoversCountPageView(RoverConstants.ROVER_MAX.value, roverCountRandomGenerator())
+        return renderEnterRoversCountPageView(RoverConstants.ROVER_MAX.value, roverCountRandomGeneratorForDefaultDemoTest())
     }
 
     @RequestMapping(value = ["/roversCoordinates"], method = [RequestMethod.POST])
     @ResponseBody
     fun showCoordinatePage(@RequestParam count: Int, model: Model): String {
-        return renderCoordinatePage(count)
+        return renderCoordinatePage(roverCoordinatesRandomGeneratorForDefaultDemoTest(count))
     }
 
     @RequestMapping(value = ["/set_coordinates"], method = [RequestMethod.POST])
     @ResponseBody
-
     fun showPlateauPage(@RequestParam roverCoordinates: Map<String, String>, model: Model): String {
         val coordinates = roverCoordinates.entries
             .filter { it.key.startsWith("rover") }
@@ -46,13 +45,6 @@ class RoverWebController {
                     null
                 }
             }
-
-        println("RoverCoordinates: $roverCoordinates")
-
-        println("Grouped Coordinates: ${roverCoordinates.entries.groupBy({ it.key.substringBeforeLast('_') }, { Pair(it.key.substringAfterLast('_'), it.value) })}")
-
-        println("Final Coordinates: $coordinates")
-
 
         val roverCount = roverCoordinates.size / 2
 //        return renderRoversOnPlateauView(coordinates, roverCount)
