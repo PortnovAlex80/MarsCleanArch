@@ -1,16 +1,9 @@
 package com.marsrover.NasaMarsRover.rover.domain
 
-import com.sun.source.tree.AssertTree
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.BeforeEach
-import kotlin.reflect.jvm.internal.impl.incremental.components.Position
-
 class RoverTest {
-
 
     @Test
     fun `Rover turn Left from NORTH to WEST`() {
