@@ -85,12 +85,52 @@ class RoverTest {
         assertEquals(Direction.WEST, rover.getDirection())
     }
 
+    @Test
+    fun `Rover move forward from 0,0 to 0,1 Direction is NORTH`() {
+        // Given
+        val rover = Rover.of(RoverIdFakeGenerator(), CoordinatesXY.zeroPosition(), Direction.NORTH)
+        // When
+        rover.moveForward()
+        // Then
+        assertEquals(CoordinatesXY(0,1), rover.getCoordinatesXY())
+    }
+
+    @Test
+    fun `Rover move forward from 0,0 to 1,0 Direction is EAST`() {
+        // Given
+        val rover = Rover.of(RoverIdFakeGenerator(), CoordinatesXY.zeroPosition(), Direction.EAST)
+        // When
+        rover.moveForward()
+        // Then
+        assertEquals(CoordinatesXY(1,0), rover.getCoordinatesXY())
+    }
+
+    @Test
+    fun `Rover move forward from 1,1 to 1,0 Direction is SOUTH`() {
+        // Given
+        val rover = Rover.of(RoverIdFakeGenerator(), CoordinatesXY(1,1), Direction.SOUTH)
+        // When
+        rover.moveForward()
+        // Then
+        assertEquals(CoordinatesXY(1,0), rover.getCoordinatesXY())
+    }
+
+    @Test
+    fun `Rover move forward from 1,1 to 0,1 Direction is WEST`() {
+        // Given
+        val rover = Rover.of(RoverIdFakeGenerator(), CoordinatesXY(1,1), Direction.WEST)
+        // When
+        rover.moveForward()
+        // Then
+        assertEquals(CoordinatesXY(0,1), rover.getCoordinatesXY())
+    }
 
     class RoverIdFakeGenerator() : RoverIdGeneratorPort {
         override fun generate(): RoverId {
             return RoverId(1L)
         }
-
     }
+
+
 }
 

@@ -30,12 +30,16 @@ class Rover(
     // Moves the rover forward based on its current direction.
     fun moveForward(): CommandResult {
         // If it's safe to move forward, proceed. Otherwise, return FAILURE.
-        return if (scan()) {
-            TODO("Move forward")
-            CommandResult.SUCCESS
-        } else {
-            CommandResult.FAILURE
+        val x = coordinatesXY.x
+        val y = coordinatesXY.y
+
+        coordinatesXY = when (direction) {
+            Direction.NORTH -> CoordinatesXY(x, y + 1)
+            Direction.WEST -> CoordinatesXY(x - 1, y)
+            Direction.SOUTH -> CoordinatesXY(x, y - 1)
+            Direction.EAST -> CoordinatesXY(x + 1, y)
         }
+        return CommandResult.SUCCESS
     }
 
     fun turnLeft(): CommandResult {
@@ -59,7 +63,7 @@ class Rover(
             Direction.SOUTH -> Direction.WEST
             Direction.EAST -> Direction.SOUTH
         }
-                return CommandResult.SUCCESS
+        return CommandResult.SUCCESS
 
     }
 
