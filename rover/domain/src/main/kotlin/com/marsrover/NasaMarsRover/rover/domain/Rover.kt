@@ -1,10 +1,12 @@
 package com.marsrover.NasaMarsRover.rover.domain
 
+import java.util.*
+
+
 class Rover(
     val roverId: RoverId,
     private var coordinatesXY: CoordinatesXY,
-    private var direction: Direction,
-    private val commandHistory: MutableList<Command> = mutableListOf()
+    private var direction: Direction
 ) {
 
     fun getCoordinatesXY(): CoordinatesXY = coordinatesXY
@@ -19,15 +21,27 @@ class Rover(
             Rover(roverIdGeneratorPort.generate(), coordinatesXY, direction)
     }
 
-    // Добавление команды в историю
+    data class RoverPosition(val coordinatesXY: CoordinatesXY, val direction: Direction)
+
+    private val roverCommandHistory = RoverCommandHistory()
+
     private fun addCommandToHistory(command: Command) {
-        commandHistory.add(command)
+        roverCommandHistory.addCommand(roverId, command)
+    }
+    // Stack для функции "отмена"
+    private val commandStack: Stack<Command> = Stack()
+    fun undoLastCommand() {
+        if (commandStack.isNotEmpty()) {
+            val lastCommand = commandStack.pop()
+            TODO("Implement undo for $lastCommand")
+        }
     }
 
     // Выполнение команды
     private fun executeCommand(command: Command) {
         command.action.invoke(this)
         addCommandToHistory(command)
+        commandStack.push(command)
     }
 
     fun executeCommands(commands: List<Command>) {
@@ -41,13 +55,14 @@ class Rover(
         NOP(Rover::noOperation); //NOP - NO Operation (NOP)
 
         companion object {
+            // HashSet use example. (or Set it's the same in this case).
             // Cache of valid command characters to avoid repeated computations.
-            private val validCommandsChars = values().map { it.name.first() }.toSet()
+            private val validCommandsSet = values().map { it.name.first() }.toHashSet()
 
             // Convert a string of commands into a list of Command enums.
             // If any command in the string is invalid, NOP is returned.
             fun fromString(commands: String): List<Command> {
-                return if (commands.all { it in validCommandsChars }) {
+                return if (commands.all { it in validCommandsSet }) {
                     commands.map { valueOf(it.toString()) }
                 } else {
                     listOf(NOP)
