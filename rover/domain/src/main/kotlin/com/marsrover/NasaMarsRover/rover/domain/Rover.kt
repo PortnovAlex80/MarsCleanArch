@@ -64,7 +64,6 @@ class Rover(
             Direction.EAST -> Direction.SOUTH
         }
         return CommandResult.SUCCESS
-
     }
 
     // Scans the space in front of the rover to determine if it's safe to proceed.
