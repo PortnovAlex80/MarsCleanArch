@@ -18,7 +18,7 @@ class CreateRoversService(val createRoversPort: CreateRoversPort, val roverIdGen
         for (i in 1..command.count) {
             val rover = Rover.of(roverIdGenerator, CoordinatesXY.zeroPosition(), Direction.default())
             rovers.add(rover)
-            println("Добавлен ровер ${rover.roverId.value} Позиция: ${rover.coordinatesXY.x},${rover.coordinatesXY.y}. Направление: ${rover.direction}")
+            println("Добавлен ровер ${rover.roverId.value} Позиция: ${rover.getCoordinatesXY().x},${rover.getCoordinatesXY().y}. Направление: ${rover.getCoordinatesXY()}")
         }
 
         // save the created Rovers to DB
