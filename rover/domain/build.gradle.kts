@@ -17,6 +17,7 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 
 }
 

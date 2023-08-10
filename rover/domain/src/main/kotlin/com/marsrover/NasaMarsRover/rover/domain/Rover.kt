@@ -40,24 +40,27 @@ class Rover(
 
     fun turnLeft(): CommandResult {
         // Implement the logic of turning left.
-        try {
-            TODO("Not implemented")
-            return CommandResult.SUCCESS
-        } catch (e: Exception) {
-            // Log or handle the exception
-            return CommandResult.FAILURE
+
+        direction = when (direction) {
+            Direction.NORTH -> Direction.WEST
+            Direction.WEST -> Direction.SOUTH
+            Direction.SOUTH -> Direction.EAST
+            Direction.EAST -> Direction.NORTH
         }
+        return CommandResult.SUCCESS
     }
 
     fun turnRight(): CommandResult {
         // Implement the logic of turning right.
-        try {
-            TODO("Not implemented")
-            return CommandResult.SUCCESS
-        } catch (e: Exception) {
-            // Log or handle the exception
-            return CommandResult.FAILURE
+
+        direction = when (direction) {
+            Direction.NORTH -> Direction.EAST
+            Direction.WEST -> Direction.NORTH
+            Direction.SOUTH -> Direction.WEST
+            Direction.EAST -> Direction.SOUTH
         }
+                return CommandResult.SUCCESS
+
     }
 
     // Scans the space in front of the rover to determine if it's safe to proceed.

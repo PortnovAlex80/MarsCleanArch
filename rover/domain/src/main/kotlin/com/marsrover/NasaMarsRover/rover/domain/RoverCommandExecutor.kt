@@ -1,6 +1,6 @@
 package com.marsrover.NasaMarsRover.rover.domain
 
-class CommandExecutor(
+class RoverCommandExecutor(
     private val rover: Rover,
     private val commandHistory: RoverCommandHistory,
     private val commandUndoManager: CommandUndoManager
