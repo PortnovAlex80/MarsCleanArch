@@ -1,4 +1,4 @@
-package com.marsrover.NasaMarsRover.rover.domain.valueobjects
+package com.marsrover.NasaMarsRover.rover.domain
 
 enum class Direction {
     NORTH,

@@ -1,9 +1,5 @@
 package com.marsrover.NasaMarsRover.rover.domain
 
-import com.marsrover.NasaMarsRover.rover.domain.valueobjects.CoordinatesXY
-import com.marsrover.NasaMarsRover.rover.domain.valueobjects.Direction
-import com.marsrover.NasaMarsRover.rover.domain.valueobjects.RoverId
-
 class Rover(
     val roverId: RoverId,
     private var coordinatesXY: CoordinatesXY,
