@@ -1,4 +1,4 @@
-package com.marsrover.NasaMarsRover.rover.domain
+package com.marsrover.NasaMarsRover.rover.domain.valueobjects
 
 data class CoordinatesXY(val x: Int, val y: Int) {
     init {

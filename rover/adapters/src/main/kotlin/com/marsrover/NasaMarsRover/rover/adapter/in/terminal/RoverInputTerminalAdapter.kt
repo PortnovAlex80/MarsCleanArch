@@ -1,7 +1,7 @@
 package com.marsrover.NasaMarsRover.rover.adapter.`in`.terminal
 
-import com.marsrover.NasaMarsRover.rover.domain.Direction
-import com.marsrover.NasaMarsRover.rover.domain.CoordinatesXY
+import com.marsrover.NasaMarsRover.rover.domain.valueobjects.Direction
+import com.marsrover.NasaMarsRover.rover.domain.valueobjects.CoordinatesXY
 
 class RoverInputTerminalAdapter(private val userInputOutput: UserInputOutputInterface) {
     fun getNumberOfRovers(): Int {

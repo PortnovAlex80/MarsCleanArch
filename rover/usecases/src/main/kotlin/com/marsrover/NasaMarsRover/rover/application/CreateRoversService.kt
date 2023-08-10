@@ -4,10 +4,9 @@ import com.marsrover.NasaMarsRover.rover.application.port.`in`.CreateRoversComma
 import com.marsrover.NasaMarsRover.rover.application.port.`in`.CreateRoversUseCase
 import com.marsrover.NasaMarsRover.rover.application.port.out.CreateRoversPort
 import com.marsrover.NasaMarsRover.rover.domain.Rover
-import com.marsrover.NasaMarsRover.rover.domain.CoordinatesXY
-import com.marsrover.NasaMarsRover.rover.domain.Direction
-
 import com.marsrover.NasaMarsRover.rover.domain.RoverIdGeneratorPort
+import com.marsrover.NasaMarsRover.rover.domain.valueobjects.CoordinatesXY
+import com.marsrover.NasaMarsRover.rover.domain.valueobjects.Direction
 
 class CreateRoversService(val createRoversPort: CreateRoversPort, val roverIdGenerator: RoverIdGeneratorPort) :
     CreateRoversUseCase {

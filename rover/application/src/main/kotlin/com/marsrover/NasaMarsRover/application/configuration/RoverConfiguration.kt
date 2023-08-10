@@ -8,8 +8,8 @@ import com.marsrover.NasaMarsRover.rover.adapter.out.persistence.inmemory.InMemo
 import com.marsrover.NasaMarsRover.rover.application.CreateRoversService
 import com.marsrover.NasaMarsRover.rover.application.port.`in`.CreateRoversUseCase
 import com.marsrover.NasaMarsRover.rover.application.port.out.CreateRoversPort
-
 import com.marsrover.NasaMarsRover.rover.domain.RoverIdGeneratorPort
+
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
