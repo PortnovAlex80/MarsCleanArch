@@ -8,6 +8,5 @@ import org.springframework.boot.runApplication
 class NasaMarsRoverApplication
 
 fun main(args: Array<String>) {
-
 	runApplication<RoverConfiguration>(*args)
 }

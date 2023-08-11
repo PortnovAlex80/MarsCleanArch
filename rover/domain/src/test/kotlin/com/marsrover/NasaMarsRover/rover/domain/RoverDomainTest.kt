@@ -3,7 +3,7 @@ package com.marsrover.NasaMarsRover.rover.domain
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class RoverTest {
+class RoverDomainTest {
 
     @Test
     fun `Rover turn Left from NORTH to WEST`() {

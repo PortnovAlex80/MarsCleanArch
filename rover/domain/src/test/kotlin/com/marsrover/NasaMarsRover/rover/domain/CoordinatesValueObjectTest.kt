@@ -3,7 +3,7 @@ package com.marsrover.NasaMarsRover.rover.domain
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class CoordinatesXYTest {
+class CoordinatesValueObjectTest {
     @Test
     fun `When pass negative x,y values then throw error`() {
 
