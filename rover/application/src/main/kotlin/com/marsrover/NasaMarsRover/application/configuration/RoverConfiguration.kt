@@ -7,7 +7,7 @@ import com.marsrover.NasaMarsRover.rover.adapter.out.persistence.inmemory.InMemo
 
 import com.marsrover.NasaMarsRover.rover.application.CreateRoversService
 import com.marsrover.NasaMarsRover.rover.application.port.`in`.CreateRoversUseCase
-import com.marsrover.NasaMarsRover.rover.application.port.out.CreateRoversPort
+import com.marsrover.NasaMarsRover.rover.application.port.out.CreateRoversPortToSaveOut
 import com.marsrover.NasaMarsRover.rover.domain.RoverIdGeneratorPort
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -27,8 +27,8 @@ class RoverConfiguration {
     fun createRoversPort() = InMemoryRoverPersistenceAdapter()
 
     @Bean
-    fun createRoversUseCase(createRoversPort: CreateRoversPort, roverIdGenerator: RoverIdGeneratorPort) =
-        CreateRoversService(createRoversPort, roverIdGenerator)
+    fun createRoversUseCase(createRoversPortToSaveOut: CreateRoversPortToSaveOut, roverIdGenerator: RoverIdGeneratorPort) =
+        CreateRoversService(createRoversPortToSaveOut, roverIdGenerator)
 
     @Bean
     fun roverRestController(createRoversUseCase: CreateRoversUseCase) = RoverRestController(createRoversUseCase)

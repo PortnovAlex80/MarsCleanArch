@@ -2,13 +2,13 @@ package com.marsrover.NasaMarsRover.rover.application
 
 import com.marsrover.NasaMarsRover.rover.application.port.`in`.CreateRoversCommand
 import com.marsrover.NasaMarsRover.rover.application.port.`in`.CreateRoversUseCase
-import com.marsrover.NasaMarsRover.rover.application.port.out.CreateRoversPort
+import com.marsrover.NasaMarsRover.rover.application.port.out.CreateRoversPortToSaveOut
 import com.marsrover.NasaMarsRover.rover.domain.CoordinatesXY
 import com.marsrover.NasaMarsRover.rover.domain.Direction
 import com.marsrover.NasaMarsRover.rover.domain.Rover
 import com.marsrover.NasaMarsRover.rover.domain.RoverIdGeneratorPort
 
-class CreateRoversService(val createRoversPort: CreateRoversPort, val roverIdGenerator: RoverIdGeneratorPort) :
+class CreateRoversService(val createRoversPortToSaveOut: CreateRoversPortToSaveOut, val roverIdGenerator: RoverIdGeneratorPort) :
     CreateRoversUseCase {
     override fun execute(command: CreateRoversCommand) {
 
@@ -22,6 +22,6 @@ class CreateRoversService(val createRoversPort: CreateRoversPort, val roverIdGen
         }
 
         // save the created Rovers to DB
-        createRoversPort.createRovers(rovers)
+        createRoversPortToSaveOut.createRoversSave(rovers)
     }
 }

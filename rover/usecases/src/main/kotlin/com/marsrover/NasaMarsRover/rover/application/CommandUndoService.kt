@@ -3,11 +3,11 @@ package com.marsrover.NasaMarsRover.rover.application
 import java.util.*
 
 class CommandUndoService {
-    private val commandStack: Stack<RoverCommandsExecutorService.Command> = Stack()
-    fun addCommandToStack(command: RoverCommandsExecutorService.Command) {
+    private val commandStack: Stack<RoverCommandsExecService.Command> = Stack()
+    fun addCommandToStack(command: RoverCommandsExecService.Command) {
         commandStack.push(command)
     }
-    fun undoLastCommand(): RoverCommandsExecutorService.Command? {
+    fun undoLastCommand(): RoverCommandsExecService.Command? {
         return if (commandStack.isNotEmpty()) commandStack.pop() else null
     }
 }

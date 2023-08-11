@@ -2,7 +2,7 @@ package com.marsrover.NasaMarsRover.rover.application
 
 import com.marsrover.NasaMarsRover.rover.domain.Rover
 
-class RoverCommandsExecutorService(
+class RoverCommandsExecService(
     private val rover: Rover,
     private val commandHistory: RoverCommandHistoryService,
     private val commandUndoService: CommandUndoService
