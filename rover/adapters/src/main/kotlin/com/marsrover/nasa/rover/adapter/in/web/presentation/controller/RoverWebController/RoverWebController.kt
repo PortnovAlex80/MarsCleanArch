@@ -32,6 +32,6 @@ class RoverWebController {
     @PostMapping("/set_coordinates") // TODO Make URL to CONST and ENV
     @ResponseBody
     fun showPlateauPage(@RequestParam coordinates: List<Double>, model: Model): String {
-        return renderRoversOnOpenMapPage(RoverPresentationDTO.fromCoordinatesToRovers(coordinates))
+        return renderRoversOnOpenMapPage(RoverPresentationDTO.fromCoordinatesToRoverPresentationDTO(coordinates))
     }
 }

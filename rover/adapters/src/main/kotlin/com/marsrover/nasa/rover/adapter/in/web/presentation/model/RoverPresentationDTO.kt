@@ -6,7 +6,7 @@ data class RoverPresentationDTO(
     val y: Double
 ) {
     companion object {
-        fun fromCoordinatesToRovers(coordinates: List<Double>): List<RoverPresentationDTO> {
+        fun fromCoordinatesToRoverPresentationDTO(coordinates: List<Double>): List<RoverPresentationDTO> {
             return coordinates.chunked(2).mapIndexed { index, coordList ->
                 RoverPresentationDTO(
                     roverTemporaryId = index + 1,

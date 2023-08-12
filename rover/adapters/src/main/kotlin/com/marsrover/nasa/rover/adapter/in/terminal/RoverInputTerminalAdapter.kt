@@ -47,8 +47,8 @@ class RoverInputTerminalAdapter(private val userInputOutput: UserInputOutputInte
                 continue
             }
 
-            val x = input[0].toIntOrNull()
-            val y = input[1].toIntOrNull()
+            val x = input[0].toDoubleOrNull()
+            val y = input[1].toDoubleOrNull()
             val isDirectionValid = Direction.isValidInput(input[2])
             val direction = Direction.valueOf(input[2].uppercase())
             if (x == null || y == null || !isDirectionValid) {
