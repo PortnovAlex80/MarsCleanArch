@@ -2,8 +2,6 @@ package com.marsrover.nasa.rover.application.port.out
 
 import com.marsrover.nasa.rover.domain.Rover
 
-interface CreateRoversPortToSaveOut {
+interface CreateRoversPortOut {
     fun createRoversSave(rovers: List<Rover>)
-
-    fun readRovers(): List<Rover>
 }

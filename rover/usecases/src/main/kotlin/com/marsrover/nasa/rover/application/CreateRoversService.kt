@@ -2,15 +2,14 @@ package com.marsrover.nasa.rover.application
 
 import com.marsrover.nasa.rover.application.port.`in`.CreateRoversCommand
 import com.marsrover.nasa.rover.application.port.`in`.CreateRoversUseCase
-import com.marsrover.nasa.rover.application.port.out.CreateRoversPortToSaveOut
+import com.marsrover.nasa.rover.application.port.out.CreateRoversPortOut
 import com.marsrover.nasa.rover.domain.CoordinatesXY
 import com.marsrover.nasa.rover.domain.Direction
 import com.marsrover.nasa.rover.domain.Rover
 import com.marsrover.nasa.rover.domain.RoverIdGeneratorPort
-import kotlin.reflect.jvm.internal.impl.incremental.components.Position
 
 class CreateRoversService(
-    val createRoversPortToSaveOut: CreateRoversPortToSaveOut,
+    val createRoversPortOut: CreateRoversPortOut,
     val roverIdGenerator: RoverIdGeneratorPort
 ) :
     CreateRoversUseCase {
@@ -29,6 +28,6 @@ class CreateRoversService(
         }
 
         // save the created Rovers to DB
-        createRoversPortToSaveOut.createRoversSave(rovers)
+        createRoversPortOut.createRoversSave(rovers)
     }
 }
