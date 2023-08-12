@@ -7,6 +7,7 @@ import com.marsrover.nasa.rover.domain.RoverId
 
 class GetRoverByIdUseCase(private val roverExtractorPortIn: RoverExtractorPortIn ): GetRoverById {
     override fun execute(id: RoverId): Rover? {
+        println("GET BY ID ${roverExtractorPortIn.getRoverById(id)}")
         return roverExtractorPortIn.getRoverById(id)
     }
 }

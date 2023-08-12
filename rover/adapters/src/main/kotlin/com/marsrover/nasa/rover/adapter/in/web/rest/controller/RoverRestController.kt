@@ -10,17 +10,13 @@ import com.marsrover.nasa.rover.domain.CoordinatesXY
 import com.marsrover.nasa.rover.domain.Rover
 import com.marsrover.nasa.rover.domain.RoverId
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class RoverRestController(
     val createRoversUseCase: CreateRovers,
-    val getAllRovers: GetAllRovers
-//    val getRoverById: GetRoverById
+    val getAllRovers: GetAllRovers,
+    val getRoverById: GetRoverById
 ) {
 
 
@@ -46,14 +42,15 @@ class RoverRestController(
         return ResponseEntity.ok("${roversCoords.size} rovers created successfully")
     }
 
+
     @GetMapping("/rovers")
     fun getAllRovers(): List<Rover>? {
         return getAllRovers.execute()
     }
 
-//    @GetMapping("/rovers/{id}")
-//    fun getAllById(@RequestParam id: RoverId): Rover? {
-//        return getRoverById.execute(id)
-//    }
+    @GetMapping("/rovers/{id}")
+    fun getAllById(@PathVariable id: String): Rover? {
+        return getRoverById.execute(RoverId.fromStringToRoverId(id))
+    }
 }
 

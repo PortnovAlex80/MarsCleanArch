@@ -12,6 +12,7 @@ import com.marsrover.nasa.rover.application.port.`in`.RoverExtractorPortIn
 import com.marsrover.nasa.rover.application.port.out.CreateRoversPortOut
 import com.marsrover.nasa.rover.application.scenaries.CreateRoversUseCase
 import com.marsrover.nasa.rover.application.scenaries.GetAllRoversUseCase
+import com.marsrover.nasa.rover.application.scenaries.GetRoverByIdUseCase
 import com.marsrover.nasa.rover.domain.RoverIdGeneratorPort
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -39,10 +40,15 @@ class RoverConfiguration {
         GetAllRoversUseCase(roverExtractorPortIn)
 
     @Bean
+    fun getRoverByIdUseCase(roverExtractorPortIn: RoverExtractorPortIn): GetRoverById =
+        GetRoverByIdUseCase(roverExtractorPortIn)
+
+    @Bean
     fun roverRestController(
         createRoversUseCase: CreateRovers,
         getAllRovers: GetAllRovers,
-    ) = RoverRestController(createRoversUseCase, getAllRovers)
+        getRoverById: GetRoverById
+    ) = RoverRestController(createRoversUseCase, getAllRovers, getRoverById)
 
     @Bean
     fun roverWebController() = RoverWebController()
