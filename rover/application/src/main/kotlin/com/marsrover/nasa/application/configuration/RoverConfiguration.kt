@@ -4,6 +4,7 @@ import com.marsrover.nasa.rover.adapter.`in`.web.presentation.controller.RoverWe
 import com.marsrover.nasa.rover.adapter.`in`.web.rest.controller.RoverRestController
 import com.marsrover.nasa.rover.adapter.out.persistence.inmemory.InMemoryIncrementalRoverIdGeneratorAdapter
 import com.marsrover.nasa.rover.adapter.out.persistence.inmemory.InMemoryRoverPersistenceAdapter
+import com.marsrover.nasa.rover.application.CreateRovers
 
 import com.marsrover.nasa.rover.application.port.out.CreateRoversPortOut
 import com.marsrover.nasa.rover.application.scenaries.CreateRoversUseCase
@@ -30,7 +31,7 @@ class RoverConfiguration {
         CreateRoversUseCase(createRoversPortOut, roverIdGenerator)
 
     @Bean
-    fun roverRestController(createRoversUseCase: com.marsrover.nasa.rover.application.port.`in`.CreateRoversUseCase) = RoverRestController(createRoversUseCase)
+    fun roverRestController(createRoversUseCase: CreateRovers) = RoverRestController(createRoversUseCase)
 
     @Bean
     fun roverWebController() = RoverWebController()

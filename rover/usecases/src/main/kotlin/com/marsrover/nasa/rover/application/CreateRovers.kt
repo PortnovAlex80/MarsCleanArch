@@ -1,8 +1,8 @@
-package com.marsrover.nasa.rover.application.port.`in`
+package com.marsrover.nasa.rover.application
 
 import com.marsrover.nasa.rover.domain.CoordinatesXY
 
-interface CreateRoversUseCase {
+interface CreateRovers {
     fun execute(command: CreateRoversCommand)
 }
 

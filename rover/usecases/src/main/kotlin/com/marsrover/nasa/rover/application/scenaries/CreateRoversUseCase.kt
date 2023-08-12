@@ -1,7 +1,7 @@
 package com.marsrover.nasa.rover.application.scenaries
 
-import com.marsrover.nasa.rover.application.port.`in`.CreateRoversCommand
-import com.marsrover.nasa.rover.application.port.`in`.CreateRoversUseCase
+import com.marsrover.nasa.rover.application.CreateRoversCommand
+import com.marsrover.nasa.rover.application.CreateRovers
 import com.marsrover.nasa.rover.application.port.out.CreateRoversPortOut
 import com.marsrover.nasa.rover.domain.CoordinatesXY
 import com.marsrover.nasa.rover.domain.Direction
@@ -12,7 +12,7 @@ class CreateRoversUseCase(
     val createRoversPortOut: CreateRoversPortOut,
     val roverIdGenerator: RoverIdGeneratorPort
 ) :
-    CreateRoversUseCase {
+    CreateRovers {
     override fun execute(command: CreateRoversCommand) {
 
         val count = command.roversCoordinatesXY.size
