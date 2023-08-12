@@ -1,4 +1,4 @@
-package com.marsrover.nasa.rover.application
+package com.marsrover.nasa.rover.application.scenaries
 
 import com.marsrover.nasa.rover.application.port.`in`.CreateRoversCommand
 import com.marsrover.nasa.rover.application.port.`in`.CreateRoversUseCase
@@ -8,7 +8,7 @@ import com.marsrover.nasa.rover.domain.Direction
 import com.marsrover.nasa.rover.domain.Rover
 import com.marsrover.nasa.rover.domain.RoverIdGeneratorPort
 
-class CreateRoversService(
+class CreateRoversUseCase(
     val createRoversPortOut: CreateRoversPortOut,
     val roverIdGenerator: RoverIdGeneratorPort
 ) :

@@ -1,4 +1,4 @@
-package com.marsrover.nasa.rover.application
+package com.marsrover.nasa.rover.application.scenaries
 
 import com.marsrover.nasa.rover.domain.RoverId
 

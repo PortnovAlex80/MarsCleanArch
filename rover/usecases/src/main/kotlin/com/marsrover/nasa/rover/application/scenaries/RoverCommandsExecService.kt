@@ -1,11 +1,11 @@
-package com.marsrover.nasa.rover.application
+package com.marsrover.nasa.rover.application.scenaries
 
 import com.marsrover.nasa.rover.domain.Rover
 
 class RoverCommandsExecService(
     private val rover: Rover,
     private val commandHistory: RoverCommandHistoryService,
-    private val commandUndoService: CommandUndoService
+    private val commandUndoUseCase: CommandUndoUseCase
 ) {
     enum class Command(val action: Rover.() -> Rover.CommandResult) {
         L(Rover::turnLeft),
@@ -30,7 +30,7 @@ class RoverCommandsExecService(
         val result = command.action.invoke(rover)
         if ( result == Rover.CommandResult.SUCCESS) {
             commandHistory.addCommand(rover.roverId, command)
-            commandUndoService.addCommandToStack(command)
+            commandUndoUseCase.addCommandToStack(command)
         }
         return result
     }

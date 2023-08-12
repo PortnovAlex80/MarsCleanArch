@@ -9,6 +9,7 @@ import com.marsrover.nasa.rover.application.port.`in`.CreateRoversUseCase
 import com.marsrover.nasa.rover.domain.CoordinatesXY
 import com.marsrover.nasa.rover.domain.Rover
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
@@ -36,6 +37,12 @@ class RoverRestController(val createRoversUseCase: CreateRoversUseCase) {
 
         return ResponseEntity.ok("${roversCoords.size} rovers created successfully")
     }
+
+    @GetMapping("/rovers")
+    fun getAllRovers(){
+        return getAllRovers()
+    }
+
 }
 
 //
