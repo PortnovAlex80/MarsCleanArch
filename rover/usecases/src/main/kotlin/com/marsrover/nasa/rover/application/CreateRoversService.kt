@@ -8,7 +8,10 @@ import com.marsrover.nasa.rover.domain.Direction
 import com.marsrover.nasa.rover.domain.Rover
 import com.marsrover.nasa.rover.domain.RoverIdGeneratorPort
 
-class CreateRoversService(val createRoversPortToSaveOut: CreateRoversPortToSaveOut, val roverIdGenerator: RoverIdGeneratorPort) :
+class CreateRoversService(
+    val createRoversPortToSaveOut: CreateRoversPortToSaveOut,
+    val roverIdGenerator: RoverIdGeneratorPort
+) :
     CreateRoversUseCase {
     override fun execute(command: CreateRoversCommand) {
 

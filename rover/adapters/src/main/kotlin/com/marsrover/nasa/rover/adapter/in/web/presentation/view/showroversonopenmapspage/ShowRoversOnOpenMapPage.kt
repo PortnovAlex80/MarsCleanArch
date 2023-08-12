@@ -71,10 +71,48 @@ fun renderRoversOnOpenMapPage(rovers: List<RoverPresentationDTO>): String =
         """.trimIndent()
                         }
                     }
+                    // rovers create from listener
+                    script {
+                        unsafe {
+                            +"""
+        document.addEventListener('DOMContentLoaded', function() {
+            var form = document.getElementById('confirmRoversCreateForm');
+            
+            if(form) {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();  // Stop the form from submitting the usual way
+
+                    var formData = new FormData(event.target);
+
+                    fetch(event.target.action, {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => {
+                        if (response.ok) {
+                            console.log('Rovers count sent successfully!');
+                        } else {
+                            console.error('Failed to send rovers count.');
+                        }
+                    });
+                });
+            } else {
+                console.error('Form not found!');
+            }
+        });
+        """.trimIndent()
+                        }
+                    }
+
 
                     div(classes = "button-group") {
                         // For the "Confirm Rover Creation" button
-                        form(action = "/confirm_rovers", method = FormMethod.post, classes = "d-inline-block") {
+                        form(action = "/rovers", method = FormMethod.post, classes = "d-inline-block") {
+                            attributes["id"] = "confirmRoversCreateForm"
+                            // Hidden input field with the rover count
+                            input(type = InputType.hidden, name = "count") {
+                                value = rovers.size.toString()  // assuming rovers is accessible here
+                            }
+
                             button(classes = "btn btn-primary", type = ButtonType.submit) { +"Confirm Rover Creation" }
                         }
 
@@ -99,4 +137,3 @@ fun renderRoversOnOpenMapPage(rovers: List<RoverPresentationDTO>): String =
 fun List<RoverPresentationDTO>.toJsonString(): String {
     return joinToString(prefix = "[", postfix = "]") { "{ x: ${it.x}, y: ${it.y} }" }
 }
-

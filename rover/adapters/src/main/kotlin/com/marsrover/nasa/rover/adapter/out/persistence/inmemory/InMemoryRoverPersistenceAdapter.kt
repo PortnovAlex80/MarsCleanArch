@@ -11,4 +11,7 @@ class InMemoryRoverPersistenceAdapter : CreateRoversPortToSaveOut {
             inMemoryStorage.put(rover.roverId, rover)
         }
     }
+    override fun readRovers(): List<Rover> {
+        return inMemoryStorage.values.toList()
+    }
 }

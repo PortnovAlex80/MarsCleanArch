@@ -12,8 +12,7 @@ class RoverRestController(val createRoversUseCase: CreateRoversUseCase) {
         @PostMapping("/rovers")
     fun createRoversAmount(@RequestParam count: Int): ResponseEntity<String> {
         val createRoversCommand = CreateRoversCommand(count)
-        println("From rovers page")
         createRoversUseCase.execute(createRoversCommand)
-        return ResponseEntity.ok("Count rover is ${count}")
+        return ResponseEntity.ok("${count} created successful")
     }
 }
