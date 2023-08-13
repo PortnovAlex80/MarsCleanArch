@@ -5,15 +5,17 @@ import com.marsrover.nasa.rover.adapter.`in`.web.presentation.utils.RoverConstan
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.utils.roverCoordinatesRandomGeneratorForDefaultDemoTest
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.utils.roverCountRandomGeneratorForDefaultDemoTest
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.utils.*
+import com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.controlroversonopenmapspage.renderControlRoverOnMapPage
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.enterroverscoordinatesspage.renderCoordinatePage
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.enterroverscountpage.renderEnterRoversCountPageView
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.showroversonopenmapspage.renderRoversOnOpenMapPage
+import com.marsrover.nasa.rover.application.GetAllRovers
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 
 @Controller
-class RoverWebController {
+class RoverWebController( val getAllRovers: GetAllRovers) {
     @RequestMapping(value = ["/"], method = [RequestMethod.GET]) // TODO Make URL to CONST and ENV
     @ResponseBody
     fun showStartPage(model: Model): String {
@@ -33,5 +35,12 @@ class RoverWebController {
     @ResponseBody
     fun showPlateauPage(@RequestParam coordinates: List<Double>, model: Model): String {
         return renderRoversOnOpenMapPage(RoverPresentationDTO.fromCoordinatesToRoverPresentationDTO(coordinates))
+    }
+
+    @GetMapping("/ctrlroverpage") // TODO Make URL to CONST and ENV
+    @ResponseBody
+    fun showRoverControlPage(getAllRovers: GetAllRovers, model: Model): String {
+        val rovers = getAllRovers.execute() ?: return "not found"
+        return renderControlRoverOnMapPage(rovers)
     }
 }

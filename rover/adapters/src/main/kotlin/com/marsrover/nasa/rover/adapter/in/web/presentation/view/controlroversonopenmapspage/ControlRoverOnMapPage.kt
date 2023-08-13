@@ -1,12 +1,13 @@
-package com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.showroversonopenmapspage
+package com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.controlroversonopenmapspage
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.model.RoverPresentationDTO
+import com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.showroversonopenmapspage.bootstrapShowRoversOnOpenMapPageCSS
 import com.marsrover.nasa.rover.domain.Rover
 import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
 
-fun renderRoversOnOpenMapPage(rovers: List<RoverPresentationDTO>): String =
+fun renderControlRoverOnMapPage(rovers: List<Rover>): String =
     StringBuilder()
         .appendHTML()
         .html {
@@ -28,6 +29,9 @@ fun renderRoversOnOpenMapPage(rovers: List<RoverPresentationDTO>): String =
                         id = "map"
                         style = "height: 400px; width: 100%;"
                     }
+
+                    val roverCoordinatesJson = rovers.toCoordinatesJsonString()
+
                     script {
                         unsafe {
                             +"""
@@ -49,11 +53,11 @@ fun renderRoversOnOpenMapPage(rovers: List<RoverPresentationDTO>): String =
                                popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
                        });  
             
-                       var roverCoordinates = ${rovers.toJsonString()};
-                                     
-                       for(var i = 0; i < roverCoordinates.length; i++) {
-                           var lat = roverCoordinates[i].x;
-                           var lng = roverCoordinates[i].y;
+                       const rovers = $roverCoordinatesJson;
+                       
+                       for(var i = 0; i < rovers.length; i++) {
+                           var lat = rovers[i].x;
+                           var lng = rovers[i].y;
             
                            // Creating a Marker
                            //var marker1 = L.marker([lat, lng]);
@@ -73,51 +77,56 @@ fun renderRoversOnOpenMapPage(rovers: List<RoverPresentationDTO>): String =
         """.trimIndent()
                         }
                     }
-                    // rovers create from listener
-                    script {
-                        unsafe {
-                                            +"""
-                        document.addEventListener('DOMContentLoaded', function() {
-                            var form = document.getElementById('confirmRoversCreateForm');
-                            
-                            if(form) {
-                                form.addEventListener('submit', function(event) {
-                                    event.preventDefault();  // Stop the form from submitting the usual way
-                
-                                    var roversJson = ${rovers.toJsonString()}; // Assuming you have the method to convert to JSON
-                
-                                    fetch(event.target.action, {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json'
-                                        },
-                                        body: JSON.stringify({
-                                            rovers: roversJson
-                                        })
-                                    }).then(response => {
-                                        if (response.ok) {
-                                            console.log('Rovers sent successfully!');
-                                            window.location.href = "/ctrlroverpage";  // Redirect to the control rover page    
-                                        } else {
-                                            console.error('Failed to send rovers.');
-                                        }
-                                    });
-                                });
+
+                                script {
+                                    unsafe {
+                                        +"""
+                    function controlRover(direction) {
+                        var selectedRoverId = getSelectedRoverId();
+                        if (!selectedRoverId) {
+                            alert('Please select a rover first!');
+                            return;
+                        }
+            
+                        var endpoint = "/rovers/" + selectedRoverId + "/" + direction;
+                        fetch(endpoint, {
+                            method: 'POST'
+                        }).then(response => {
+                            if (response.ok) {
+                                alert('Rover moved successfully!');
+                                // Here you may also wish to update the rover's position on the map.
                             } else {
-                                console.error('Form not found!');
+                                alert('Failed to move the rover.');
                             }
                         });
-                        """.trimIndent()
-                        }
                     }
-
+            
+                    function getSelectedRoverId() {
+                        // Assuming you'll have a way to select a specific rover, return its id here.
+                        // This could be a dropdown, radio buttons, etc.
+                        return null;  // replace this with the actual selected rover id
+                    }
+                    """.trimIndent()
+                                    }
+                                }
 
                     div(classes = "button-group") {
-                        // For the "Confirm Rover Creation" button
-                        form(action = "/rovers", method = FormMethod.post, classes = "d-inline-block") {
-                            attributes["id"] = "confirmRoversCreateForm"
-                            button(classes = "btn btn-primary", type = ButtonType.submit) { +"Confirm Rover Creation" }
+
+                        div(classes = "rover-control-buttons") {
+                            button(classes = "btn btn-success", type = ButtonType.button) {
+                                attributes["onclick"] = "controlRover('forward')"
+                                +"Move Forward"
+                            }
+                            button(classes = "btn btn-info", type = ButtonType.button) {
+                                attributes["onclick"] = "controlRover('left')"
+                                +"Turn Left"
+                            }
+                            button(classes = "btn btn-info", type = ButtonType.button) {
+                                attributes["onclick"] = "controlRover('right')"
+                                +"Turn Right"
+                            }
                         }
+
 
                         // Spacer div to create a little gap between the two buttons
                         div(classes = "d-inline-block") {
@@ -141,3 +150,11 @@ fun List<RoverPresentationDTO>.toJsonString(): String {
     return joinToString(prefix = "[", postfix = "]") { "{ x: ${it.x}, y: ${it.y} }" }
 }
 
+
+// Convert the rovers list into a list of coordinates and then serialize it to JSON.
+fun List<Rover>.toCoordinatesJsonString(): String {
+    val coordinatesList = this.map { rover ->
+        mapOf("lat" to rover.getCoordinatesXY().y, "lng" to rover.getCoordinatesXY().x)
+    }
+    return jacksonObjectMapper().writeValueAsString(coordinatesList)
+}
