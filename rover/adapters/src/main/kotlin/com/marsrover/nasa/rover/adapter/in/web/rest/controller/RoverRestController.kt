@@ -63,7 +63,7 @@ class RoverRestController(
         return turnRoverRight.execute(RoverId.fromStringToRoverId(id))
     }
 
-    @PostMapping("/rovers/{id}/move")
+    @PostMapping("/rovers/{id}/forward")
     fun moveRoverForward(@PathVariable id: String): Boolean {
         return moveRoverForward.execute(RoverId.fromStringToRoverId(id))
     }

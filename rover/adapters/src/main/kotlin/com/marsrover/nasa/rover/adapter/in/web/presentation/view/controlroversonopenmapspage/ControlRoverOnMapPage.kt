@@ -35,81 +35,113 @@ fun renderControlRoverOnMapPage(rovers: List<Rover>): String =
                     script {
                         unsafe {
                             +"""
-                       var map = L.map('map').setView([-24.5, -69.5], 9); // центр пустыни Атакама
+        var map = new L.map('map')
+        map.setView([-24.5, -69.5], 9); // центр пустыни Атакама
+        var markers = {};
 
-                       // Creating a Layer object
-                       var layer = new L.TileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                           attribution: '&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-                       });
 
-                      // Adding layer to the map
-                       map.addLayer(layer);
+        // Creating a Layer object
+        var layer = new L.TileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        });
+        map.addLayer(layer);
 
-                       // Define the custom icon
-                           var roverIcon = L.icon({
-                               iconUrl: 'https://img.icons8.com/?size=512&id=pg6uItOKXEQE&format=png', // Replace this with the path to your icon
-                               iconSize: [30, 30], // size of the icon (You can adjust based on your icon's dimensions)
-                               iconAnchor: [15, 15], // point of the icon which will correspond to marker's location
-                               popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
-                       });  
+        // Define the custom icon
+        var roverIcon = L.icon({
+            iconUrl: 'https://img.icons8.com/?size=512&id=pg6uItOKXEQE&format=png',
+            iconSize: [30, 30],
+            iconAnchor: [15, 15],
+            popupAnchor: [0, 0]
+        });
+        
+        const rovers = $roverCoordinatesJson;
+        console.log(rovers);
+
+        // Rover marker creation function
+        function createRoverMarker(id, lat, lng, icon) {
+            var marker = L.marker([lat, lng], {icon: icon});
+            marker.bindPopup('Rover ' + id).openPopup();
+            marker.addTo(map);
+            markers[id] = marker;
+
+            marker.on('click', function(e) {
+                selectedRoverId = id;
+            });
+        }
+        
+        var selectedRoverId = null;
+        
+        for(var i = 0; i < rovers.length; i++) {
+            var id = rovers[i].id
+            var lng = rovers[i].lat;
+            var lat = rovers[i].lng;          
+            createRoverMarker(id, lat, lng, roverIcon); 
+        }
+
+        function controlRover(direction) {
+            var selectedRoverId = getSelectedRoverId();
+            if (!selectedRoverId) {
+                alert('Please select a rover first!');
+                return;
+            }
+
+            var endpoint = "/rovers/" + selectedRoverId + "/" + direction;
+            fetch(endpoint, {
+                method: 'POST'
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Rover moved successfully!');
+                    var event = new Event('roverMoved');
+                    document.dispatchEvent(event);
+                } else {
+                    alert('Failed to move the rover.');
+                }
+            });
+        }
+
+        function getSelectedRoverId() {
+            return selectedRoverId;
+        }
+
+        function updateRoversPositions() {
+            fetch("/rovers")
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(rover => {
+                var id = rover.roverId.value;
+                var lat = rover.coordinatesXY.x;
+                var lng = rover.coordinatesXY.y;
+                console.log("INSIDE Update rover's position id = "+ id)
+          console.log("INSIDE Update rover's position lat = "+ lat)
+                    markerUpdate(id, lat, lng);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching rovers:', error);
+            });
+        }
+        
+        function markerUpdate(id, lat, lng) {
+        var marker = markers[id];
+          console.log("INSIDE Update marker's position "+ marker)
+          console.log("INSIDE Update marker's position id = "+ id)
+          console.log("INSIDE Update marker's position lat = "+ lat)
+          
+          
+            if (marker) {
+                var newPosition = new L.LatLng(lat, lng);
+                marker.setLatLng(newPosition).update();  // Update marker's position 
+                console.log("Update marker's position ")
+            }
+        }
+
+        // Listener for custom roverMoved event
+        document.addEventListener('roverMoved', function() {
+            // Call a function to fetch new rover positions and update the markers.
+            updateRoversPositions();
             
-                       const rovers = $roverCoordinatesJson;
-                       console.log(rovers)
-                       
-                        // Create a separate function to handle the marker creation and event binding
-                        function createRoverMarker(id, lat, lng, icon) {
-                            var marker = L.marker([lat, lng], {icon: icon});
-                            marker.bindPopup('Rover ' + id).openPopup();
-                            marker.addTo(map);
-                        
-                            // Add an event listener for the marker's click event
-                            marker.on('click', function(e) {
-                                selectedRoverId = id;
-                            });
-                        }
-                        
-                        var selectedRoverId = null; // this remains outside the loop as before
-                        
-                       
-                       for(var i = 0; i < rovers.length; i++) {
-                           var id = rovers[i].id
-                           var lng = rovers[i].lat;
-                           var lat = rovers[i].lng;          
-                           // Creating a Marker
-                           createRoverMarker(id, lat, lng, roverIcon); 
-                       }
-
+        });
         """.trimIndent()
-                        }
-                    }
-
-                                script {
-                                    unsafe {
-                                        +"""
-                    function controlRover(direction) {
-                        var selectedRoverId = getSelectedRoverId();
-                        if (!selectedRoverId) {
-                            alert('Please select a rover first!');
-                            return;
-                        }
-            
-                        var endpoint = "/rovers/" + selectedRoverId + "/" + direction;
-                        fetch(endpoint, {
-                            method: 'POST'
-                        }).then(response => {
-                            if (response.ok) {
-                                alert('Rover moved successfully!');
-                                // Here you may also wish to update the rover's position on the map.
-                            } else {
-                                alert('Failed to move the rover.');
-                            }
-                        });
-                    }
-            
-                    function getSelectedRoverId() {
-                        return selectedRoverId;
-                    }
-                    """.trimIndent()
                                     }
                                 }
 

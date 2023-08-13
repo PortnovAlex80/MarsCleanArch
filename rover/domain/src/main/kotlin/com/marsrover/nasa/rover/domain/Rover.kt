@@ -28,16 +28,19 @@ class Rover(
     }
 
     // Moves the rover forward based on its current direction.
+// Moves the rover forward based on its current direction.
     fun moveForward(): CommandResult {
         // If it's safe to move forward, proceed. Otherwise, return FAILURE.
         val x = coordinatesXY.x
         val y = coordinatesXY.y
+        val delta = 1000 / 111320.0 // for lat
+        val deltaLng = 1000 / (111320.0 * Math.cos(Math.toRadians(y)))
 
         coordinatesXY = when (direction) {
-            Direction.NORTH -> CoordinatesXY(x, y + 1)
-            Direction.WEST -> CoordinatesXY(x - 1, y)
-            Direction.SOUTH -> CoordinatesXY(x, y - 1)
-            Direction.EAST -> CoordinatesXY(x + 1, y)
+            Direction.NORTH -> CoordinatesXY(x, y + delta)
+            Direction.WEST -> CoordinatesXY(x - deltaLng, y)
+            Direction.SOUTH -> CoordinatesXY(x, y - delta)
+            Direction.EAST -> CoordinatesXY(x + deltaLng, y)
         }
         return CommandResult.SUCCESS
     }
