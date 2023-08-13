@@ -54,24 +54,29 @@ fun renderControlRoverOnMapPage(rovers: List<Rover>): String =
                        });  
             
                        const rovers = $roverCoordinatesJson;
+                       console.log(rovers)
+                       
+                        // Create a separate function to handle the marker creation and event binding
+                        function createRoverMarker(id, lat, lng, icon) {
+                            var marker = L.marker([lat, lng], {icon: icon});
+                            marker.bindPopup('Rover ' + id).openPopup();
+                            marker.addTo(map);
+                        
+                            // Add an event listener for the marker's click event
+                            marker.on('click', function(e) {
+                                selectedRoverId = id;
+                            });
+                        }
+                        
+                        var selectedRoverId = null; // this remains outside the loop as before
+                        
                        
                        for(var i = 0; i < rovers.length; i++) {
-                           var lat = rovers[i].x;
-                           var lng = rovers[i].y;
-            
+                           var id = rovers[i].id
+                           var lng = rovers[i].lat;
+                           var lat = rovers[i].lng;          
                            // Creating a Marker
-                           //var marker1 = L.marker([lat, lng]);
-                           
-                           // Creating a Marker with the custom icon
-                           var marker = L.marker([lat, lng], {icon: roverIcon});                        
-            
-                           // Adding popup to the marker
-                           marker.bindPopup('Rover ' + (i + 1)).openPopup();
-//                           marker1.bindPopup('Rover ' + (i + 1)).openPopup();
-            
-                           // Adding marker to the map
-                           marker.addTo(map);
-//                           marker1.addTo(map);
+                           createRoverMarker(id, lat, lng, roverIcon); 
                        }
 
         """.trimIndent()
@@ -102,9 +107,7 @@ fun renderControlRoverOnMapPage(rovers: List<Rover>): String =
                     }
             
                     function getSelectedRoverId() {
-                        // Assuming you'll have a way to select a specific rover, return its id here.
-                        // This could be a dropdown, radio buttons, etc.
-                        return null;  // replace this with the actual selected rover id
+                        return selectedRoverId;
                     }
                     """.trimIndent()
                                     }
@@ -154,7 +157,9 @@ fun List<RoverPresentationDTO>.toJsonString(): String {
 // Convert the rovers list into a list of coordinates and then serialize it to JSON.
 fun List<Rover>.toCoordinatesJsonString(): String {
     val coordinatesList = this.map { rover ->
-        mapOf("lat" to rover.getCoordinatesXY().y, "lng" to rover.getCoordinatesXY().x)
+        mapOf("id" to rover.roverId.value, "lat" to rover.getCoordinatesXY().y, "lng" to rover.getCoordinatesXY().x)
     }
     return jacksonObjectMapper().writeValueAsString(coordinatesList)
 }
+
+
