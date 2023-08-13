@@ -42,7 +42,7 @@ class Rover(
         return CommandResult.SUCCESS
     }
 
-    fun turnLeft(): CommandResult {
+    fun turnLeft(): CommandResult { // maybe make private?
         // Implement the logic of turning left.
 
         direction = when (direction) {
