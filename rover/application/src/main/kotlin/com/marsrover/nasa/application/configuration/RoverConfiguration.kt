@@ -4,15 +4,12 @@ import com.marsrover.nasa.rover.adapter.`in`.web.presentation.controller.RoverWe
 import com.marsrover.nasa.rover.adapter.`in`.web.rest.controller.RoverRestController
 import com.marsrover.nasa.rover.adapter.out.persistence.inmemory.InMemoryIncrementalRoverIdGeneratorAdapter
 import com.marsrover.nasa.rover.adapter.out.persistence.inmemory.InMemoryRoverPersistenceAdapter
-import com.marsrover.nasa.rover.application.CreateRovers
-import com.marsrover.nasa.rover.application.GetAllRovers
-import com.marsrover.nasa.rover.application.GetRoverById
+import com.marsrover.nasa.rover.application.*
 import com.marsrover.nasa.rover.application.port.`in`.RoverExtractorPortIn
 
 import com.marsrover.nasa.rover.application.port.out.CreateRoversPortOut
-import com.marsrover.nasa.rover.application.scenaries.CreateRoversUseCase
-import com.marsrover.nasa.rover.application.scenaries.GetAllRoversUseCase
-import com.marsrover.nasa.rover.application.scenaries.GetRoverByIdUseCase
+import com.marsrover.nasa.rover.application.port.out.UpdateRoverByIdPortOut
+import com.marsrover.nasa.rover.application.scenaries.*
 import com.marsrover.nasa.rover.domain.RoverIdGeneratorPort
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -43,12 +40,19 @@ class RoverConfiguration {
     fun getRoverByIdUseCase(roverExtractorPortIn: RoverExtractorPortIn): GetRoverById =
         GetRoverByIdUseCase(roverExtractorPortIn)
 
+
+    @Bean
+    fun updateRoverById(updateRoverByIdPortOut: UpdateRoverByIdPortOut) = UpdateRoverByIdUseCase(updateRoverByIdPortOut)
+    @Bean
+    fun turnRoverLeftUseCase(getRoverById: GetRoverById, updateRoverById: UpdateRoverById): TurnRoverLeft = TurnRoverLeftUseCase(getRoverById,updateRoverById)
+
     @Bean
     fun roverRestController(
         createRoversUseCase: CreateRovers,
         getAllRovers: GetAllRovers,
-        getRoverById: GetRoverById
-    ) = RoverRestController(createRoversUseCase, getAllRovers, getRoverById)
+        getRoverById: GetRoverById,
+        leftRoverById: TurnRoverLeft
+    ) = RoverRestController(createRoversUseCase, getAllRovers, getRoverById, leftRoverById)
 
     @Bean
     fun roverWebController() = RoverWebController()
