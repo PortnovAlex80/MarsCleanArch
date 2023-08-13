@@ -49,7 +49,7 @@ class RoverRestController(
     }
 
     @GetMapping("/rovers/{id}")
-    fun getAllById(@PathVariable id: String): Rover? {
+    fun getRoverById(@PathVariable id: String): Rover? {
         return getRoverById.execute(RoverId.fromStringToRoverId(id))
     }
 }
