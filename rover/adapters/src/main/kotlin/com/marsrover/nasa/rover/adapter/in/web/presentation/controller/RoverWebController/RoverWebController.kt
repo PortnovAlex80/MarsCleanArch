@@ -39,7 +39,7 @@ class RoverWebController( val getAllRovers: GetAllRovers) {
 
     @GetMapping("/ctrlroverpage") // TODO Make URL to CONST and ENV
     @ResponseBody
-    fun showRoverControlPage(getAllRovers: GetAllRovers, model: Model): String {
+    fun showRoverControlPage(model: Model): String {
         val rovers = getAllRovers.execute() ?: return "not found"
         return renderControlRoverOnMapPage(rovers)
     }
