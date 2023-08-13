@@ -47,6 +47,8 @@ class RoverConfiguration {
     fun turnRoverLeftUseCase(getRoverById: GetRoverById, updateRoverById: UpdateRoverById): TurnRoverLeft = TurnRoverLeftUseCase(getRoverById,updateRoverById)
     @Bean
     fun turnRoverRightUseCase(getRoverById: GetRoverById, updateRoverById: UpdateRoverById): TurnRoverRight = TurnRoverRightUseCase(getRoverById,updateRoverById)
+    @Bean
+    fun moveRoverForwardUseCase(getRoverById: GetRoverById, updateRoverById: UpdateRoverById): MoveRoverForward = MoveRoverForwardUseCase(getRoverById, updateRoverById)
 
     @Bean
     fun roverRestController(
@@ -54,8 +56,9 @@ class RoverConfiguration {
         getAllRovers: GetAllRovers,
         getRoverById: GetRoverById,
         leftRoverById: TurnRoverLeft,
-        turnRoverRight: TurnRoverRight
-    ) = RoverRestController(createRoversUseCase, getAllRovers, getRoverById, leftRoverById, turnRoverRight)
+        turnRoverRight: TurnRoverRight,
+        moveRoverForward: MoveRoverForward
+    ) = RoverRestController(createRoversUseCase, getAllRovers, getRoverById, leftRoverById, turnRoverRight, moveRoverForward)
 
     @Bean
     fun roverWebController() = RoverWebController()

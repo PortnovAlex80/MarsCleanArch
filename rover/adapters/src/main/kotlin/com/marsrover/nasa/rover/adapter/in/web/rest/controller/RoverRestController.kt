@@ -15,7 +15,8 @@ class RoverRestController(
     val getAllRovers: GetAllRovers,
     val getRoverById: GetRoverById,
     val turnRoverLeft: TurnRoverLeft,
-    val turnRoverRight: TurnRoverRight
+    val turnRoverRight: TurnRoverRight,
+    val moveRoverForward: MoveRoverForward
 ) {
 
 
@@ -52,14 +53,20 @@ class RoverRestController(
         return getRoverById.execute(RoverId.fromStringToRoverId(id))
     }
 
-    @GetMapping("/rovers/{id}/left")
+    @GetMapping("/rovers/{id}/left")  //TODO "make POST"
     fun moveRoverToleft(@PathVariable id: String): Boolean {
         return turnRoverLeft.execute(RoverId.fromStringToRoverId(id))
     }
 
-    @GetMapping("/rovers/{id}/right")
+    @GetMapping("/rovers/{id}/right") //TODO "make POST"
     fun moveRoverToRight(@PathVariable id: String): Boolean {
         return turnRoverRight.execute(RoverId.fromStringToRoverId(id))
     }
+
+    @GetMapping("/rovers/{id}/move") //TODO "make POST"
+    fun moveRoverForward(@PathVariable id: String): Boolean {
+        return moveRoverForward.execute(RoverId.fromStringToRoverId(id))
+    }
+
 }
 
