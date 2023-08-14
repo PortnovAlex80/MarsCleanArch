@@ -5,10 +5,10 @@ import com.marsrover.nasa.rover.domain.CoordinatesXY
 
 class RoverInputTerminalAdapter(private val userInputOutput: UserInputOutputInterface) {
     fun getNumberOfRovers(): Int {
-        var numberOfRovers: Int? = null
+        var numberOfRovers: Int = 0
         var input: String
 
-        while (numberOfRovers == null || numberOfRovers < 1) {
+        while (numberOfRovers == 0 || numberOfRovers < 1) {
             userInputOutput.outputToUser("Enter number of rovers or type 'exit' to quit:")
             input = userInputOutput.readUserInput()
 
@@ -17,9 +17,9 @@ class RoverInputTerminalAdapter(private val userInputOutput: UserInputOutputInte
                 System.exit(0)
             }
 
-            numberOfRovers = input.toIntOrNull()
+            numberOfRovers = input.toIntOrNull()!!
 
-            if (numberOfRovers == null || numberOfRovers < 1) {
+            if (numberOfRovers == 0 || numberOfRovers < 1) {
                 userInputOutput.outputToUser("Invalid number of rovers. Please enter a positive integer.")
             }
         }
