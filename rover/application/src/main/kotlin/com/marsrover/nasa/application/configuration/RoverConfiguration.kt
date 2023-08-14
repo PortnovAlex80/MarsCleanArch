@@ -29,8 +29,8 @@ class RoverConfiguration {
     fun createRoversPort() = InMemoryRoverPersistenceAdapter()
 
     @Bean
-    fun createRoversUseCase(createRoversPortOut: CreateRoversPortOut, roverIdGenerator: RoverIdGeneratorPort) =
-        CreateRoversUseCase(createRoversPortOut, roverIdGenerator)
+    fun createRoversUseCase(getAllRovers: GetAllRovers,createRoversPortOut: CreateRoversPortOut, roverIdGenerator: RoverIdGeneratorPort) =
+        CreateRoversUseCase(getAllRovers, createRoversPortOut, roverIdGenerator)
 
     @Bean
     fun getAllRoversUseCase(roverExtractorPortIn: RoverExtractorPortIn): GetAllRovers =
