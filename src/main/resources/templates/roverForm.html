@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rover Form</title>
+</head>
+<body>
+<form action="#" th:action="@{/submit}" method="post" th:object="${roverForm}">
+    <label for="number_of_rovers">Количество роверов</label>
+    <input type="number" th:field="*{numberOfRovers}" id="number_of_rovers">
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
