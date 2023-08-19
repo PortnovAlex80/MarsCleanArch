@@ -22,7 +22,7 @@ class RoverRestController(
 
     val objectMapper = jacksonObjectMapper()
 
-    @PostMapping("/rovers")
+    @PostMapping(API_V1_CREATE_ROVERS)
     fun createRoversAmount(@RequestBody listOfRoversCoordinatesXY: String): ResponseEntity<String> { //TODO 'need refactoring'
 
         val rootNode: JsonNode = objectMapper.readTree(listOfRoversCoordinatesXY)

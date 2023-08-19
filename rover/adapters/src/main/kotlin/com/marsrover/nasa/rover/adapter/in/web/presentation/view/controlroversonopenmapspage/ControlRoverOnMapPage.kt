@@ -3,7 +3,7 @@ package com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.controlrover
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.model.RoverPresentationDTO
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.showroversonopenmapspage.bootstrapShowRoversOnOpenMapPageCSS
-import com.marsrover.nasa.rover.adapter.`in`.web.rest.controller.API_V1
+import com.marsrover.nasa.rover.adapter.`in`.web.rest.controller.API_V1_ROVERS
 import com.marsrover.nasa.rover.adapter.`in`.web.rest.controller.API_V1_GET_ALL_ROVERS
 import com.marsrover.nasa.rover.domain.Rover
 import kotlinx.html.*
@@ -87,7 +87,7 @@ fun renderControlRoverOnMapPage(rovers: List<Rover>): String =
                 return;
             }
 
-            var endpoint = "${API_V1}/rovers/" + selectedRoverId + "/" + direction;
+            var endpoint = "${API_V1_ROVERS}/" + selectedRoverId + "/" + direction;
             fetch(endpoint, {
                 method: 'POST'
             }).then(response => {
