@@ -1,9 +1,7 @@
 package com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.showroversonopenmapspage
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.model.RoverPresentationDTO
 import com.marsrover.nasa.rover.adapter.`in`.web.rest.controller.API_V1_CREATE_ROVERS
-import com.marsrover.nasa.rover.domain.Rover
 import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
 
