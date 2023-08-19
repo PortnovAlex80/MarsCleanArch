@@ -42,7 +42,7 @@ class RoverRestController(
         return ResponseEntity.ok("${roversCoords.size} rovers created successfully")
     }
 
-    @GetMapping(API_V1_ALL_ROVERS)
+    @GetMapping(API_V1_GET_ALL_ROVERS)
     fun getAllRovers(): List<Rover>? {
         return getAllRovers.execute()
     }
