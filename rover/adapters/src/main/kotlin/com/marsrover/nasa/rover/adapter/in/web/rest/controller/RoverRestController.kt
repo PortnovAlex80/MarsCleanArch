@@ -42,32 +42,29 @@ class RoverRestController(
         return ResponseEntity.ok("${roversCoords.size} rovers created successfully")
     }
 
-
-    @GetMapping("/rovers")
+    @GetMapping(API_V1_ALL_ROVERS)
     fun getAllRovers(): List<Rover>? {
         return getAllRovers.execute()
     }
 
-    @GetMapping("/rovers/{id}")
+    @GetMapping(API_V1_GET_ROVER_BY_ID)
     fun getRoverById(@PathVariable id: String): Rover? {
         return getRoverById.execute(RoverId.fromStringToRoverId(id))
     }
 
-    @PostMapping("/rovers/{id}/left")
+    @PostMapping(API_V1_MOVE_ROVER_LEFT)
     fun moveRoverToLeft(@PathVariable id: String): Boolean {
         return turnRoverLeft.execute(RoverId.fromStringToRoverId(id))
     }
 
-    @PostMapping("/rovers/{id}/right")
+    @PostMapping(API_V1_MOVE_ROVER_RIGHT)
     fun moveRoverToRight(@PathVariable id: String): Boolean {
         return turnRoverRight.execute(RoverId.fromStringToRoverId(id))
     }
 
-    @PostMapping("/rovers/{id}/forward")
+    @PostMapping(API_V1_MOVE_ROVER_FORWARD)
     fun moveRoverForward(@PathVariable id: String): Boolean {
         return moveRoverForward.execute(RoverId.fromStringToRoverId(id))
     }
-
-
 }
 
