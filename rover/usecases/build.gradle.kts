@@ -17,6 +17,7 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation ("io.arrow-kt:arrow-core:1.0.1")
     implementation(project(":rover:domain"))
 }
 

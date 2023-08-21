@@ -22,6 +22,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation ("io.arrow-kt:arrow-core:1.0.1")
     // view
     implementation( "org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
 

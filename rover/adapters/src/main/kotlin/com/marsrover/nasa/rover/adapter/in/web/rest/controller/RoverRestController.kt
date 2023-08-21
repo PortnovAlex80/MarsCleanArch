@@ -1,8 +1,10 @@
 package com.marsrover.nasa.rover.adapter.`in`.web.rest.controller
 
+import arrow.core.Either
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.marsrover.nasa.rover.application.*
+import com.marsrover.nasa.rover.application.scenaries.UseCaseError
 import com.marsrover.nasa.rover.domain.CoordinatesXY
 import com.marsrover.nasa.rover.domain.Rover
 import com.marsrover.nasa.rover.domain.RoverId
@@ -63,7 +65,7 @@ class RoverRestController(
     }
 
     @PostMapping(API_V1_MOVE_ROVER_FORWARD)
-    fun moveRoverForward(@PathVariable id: String): Boolean {
+    fun moveRoverForward(@PathVariable id: String): Either<UseCaseError, Unit> {
         return moveRoverForward.execute(RoverId.fromStringToRoverId(id))
     }
 }

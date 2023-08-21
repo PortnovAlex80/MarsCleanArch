@@ -1,6 +1,5 @@
 package com.marsrover.nasa.rover.domain
 
-
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
@@ -19,13 +18,13 @@ class Rover(
     }
 
     // Imitate random overheating, obstacles, and low power
-    private fun imitateRandomEvents(): Either<RoverErrors, CommandResult> {
+    private fun imitateRandomEvents(): Either<RoverDriverErrors, CommandResult> {
 
         return when (Random.nextInt(1, 11)) { // Generates a random number between 1 and 10
-            1 -> RoverErrors.LeftDriverOverheatingError.left()  // 1 in 10 chance of overheating
-            2 -> RoverErrors.RightDriverOverheatungError.left() // 1 in 10 chance of overheating
-            3 -> RoverErrors.ObstacleOnRouteError.left()        // 1 in 10 chance of an obstacle
-            4 -> RoverErrors.LowPowerError.left()               // 1 in 10 chance of low power
+            1 -> RoverDriverErrors.LeftDriverOverheatingError.left()  // 1 in 10 chance of overheating
+            2 -> RoverDriverErrors.RightDriverOverheatungError.left() // 1 in 10 chance of overheating
+            3 -> RoverDriverErrors.ObstacleOnRouteError.left()        // 1 in 10 chance of an obstacle
+            4 -> RoverDriverErrors.LowPowerError.left()               // 1 in 10 chance of low power
             else -> CommandResult.SUCCESS.right()
         }
     }
@@ -37,7 +36,7 @@ class Rover(
 
     // Moves the rover forward based on its current direction.
 // Moves the rover forward based on its current direction.
-    fun moveForward(): Either<RoverErrors, CommandResult> {
+    fun moveForward(): Either<RoverDriverErrors, CommandResult> {
 
         val randomEventResult = imitateRandomEvents()
         if (randomEventResult.isLeft()) {
@@ -94,12 +93,12 @@ enum class CommandResult {
     SUCCESS, FAILURE
 }
 
-sealed class RoverErrors : BusinessError {
-    object CountMustBePositiveError : RoverErrors()
-    object LowPowerError : RoverErrors()
-    object LeftDriverOverheatingError : RoverErrors()
-    object RightDriverOverheatungError : RoverErrors()
-    object ObstacleOnRouteError : RoverErrors()
+sealed class RoverDriverErrors : BusinessError {
+    object RoverDriverCountMustBePositiveError : RoverDriverErrors()
+    object LowPowerError : RoverDriverErrors()
+    object LeftDriverOverheatingError : RoverDriverErrors()
+    object RightDriverOverheatungError : RoverDriverErrors()
+    object ObstacleOnRouteError : RoverDriverErrors()
 }
 
 interface BusinessError

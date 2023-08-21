@@ -1,8 +1,7 @@
 package com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.showroversonopenmapspage
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.model.RoverPresentationDTO
-import com.marsrover.nasa.rover.domain.Rover
+import com.marsrover.nasa.rover.adapter.`in`.web.rest.controller.API_V1_CREATE_ROVERS
 import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
 
@@ -114,7 +113,7 @@ fun renderRoversOnOpenMapPage(rovers: List<RoverPresentationDTO>): String =
 
                     div(classes = "button-group") {
                         // For the "Confirm Rover Creation" button
-                        form(action = "/rovers", method = FormMethod.post, classes = "d-inline-block") {
+                        form(action = "${API_V1_CREATE_ROVERS}", method = FormMethod.post, classes = "d-inline-block") {
                             attributes["id"] = "confirmRoversCreateForm"
                             button(classes = "btn btn-primary", type = ButtonType.submit) { +"Confirm Rover Creation" }
                         }
