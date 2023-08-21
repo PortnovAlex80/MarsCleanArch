@@ -1,7 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    id("org.springframework.boot") version "3.1.2"
+    id("io.spring.dependency-management") version "1.1.2"
     kotlin("jvm") version "1.8.22"
+    kotlin("plugin.spring") version "1.8.22"
 }
 
 group = "com.marsrover"
@@ -16,12 +19,14 @@ repositories {
 }
 
 dependencies {
-    implementation((":NasaMarsRover:common:types"))
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     implementation ("io.arrow-kt:arrow-core:1.0.1")
+    // view
+    implementation( "org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
 
-
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<KotlinCompile> {

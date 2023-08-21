@@ -1,9 +1,6 @@
 package com.marsrover.nasa.rover.adapter.`in`.web.presentation.controller.RoverWebController
 
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.model.*
-import com.marsrover.nasa.rover.adapter.`in`.web.presentation.utils.RoverConstants
-import com.marsrover.nasa.rover.adapter.`in`.web.presentation.utils.roverCoordinatesRandomGeneratorForDefaultDemoTest
-import com.marsrover.nasa.rover.adapter.`in`.web.presentation.utils.roverCountRandomGeneratorForDefaultDemoTest
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.utils.*
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.controlroversonopenmapspage.renderControlRoverOnMapPage
 import com.marsrover.nasa.rover.adapter.`in`.web.presentation.view.enterroverscoordinatesspage.renderCoordinatePage
@@ -13,8 +10,10 @@ import com.marsrover.nasa.rover.application.GetAllRovers
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.servlet.config.annotation.EnableWebMvc
 
 @Controller
+@EnableWebMvc
 class RoverWebController( val getAllRovers: GetAllRovers) {
     @RequestMapping(value = ["/"], method = [RequestMethod.GET]) // TODO Make URL to CONST and ENV
     @ResponseBody
