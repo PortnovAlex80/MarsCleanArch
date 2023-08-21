@@ -16,12 +16,9 @@ repositories {
 }
 
 dependencies {
-    implementation((":NasaMarsRover:common:types"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     implementation ("io.arrow-kt:arrow-core:1.0.1")
-
-
 }
 
 tasks.withType<KotlinCompile> {

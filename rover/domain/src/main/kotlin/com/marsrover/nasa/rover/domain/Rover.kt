@@ -1,10 +1,9 @@
 package com.marsrover.nasa.rover.domain
 
+
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
-import com.marsrover.nasa.common.types.error.BusinessError
-
 import kotlin.random.Random
 
 class Rover(
@@ -102,3 +101,5 @@ sealed class RoverErrors : BusinessError {
     object RightDriverOverheatungError : RoverErrors()
     object ObstacleOnRouteError : RoverErrors()
 }
+
+interface BusinessError
